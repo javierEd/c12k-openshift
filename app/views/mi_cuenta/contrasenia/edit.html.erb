@@ -1,0 +1,11 @@
+<% content_for :titulo_pagina do %>Cambiar contraseña<% end %>
+<% content_for :titulo_bloque do %>Cambiar contraseña<% end %>
+
+<%= form_for @cuenta, url: cambiar_contrasenia_path, remote: true, html: { id: 'cuenta', method: 'patch', 'data-type' => :json}, :builder => FormHelper::SFormBuilder  do |f|  %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  <%= f.campo_contrasenia :current_password, autofocus: true, autocomplete: "off", placeholder: '********', label: 'Contraseña actual'  %>
+  <%= f.campo_contrasenia :password, autocomplete: "off", placeholder: '********', label: 'Contraseña nueva' %>
+  <%= f.campo_contrasenia :password_confirmation, autocomplete: "off", placeholder: '********', label: 'Confirmar contraseña' %>
+  <%= f.boton_enviar 'enviar','Enviar','plus' %>
+<% end %>

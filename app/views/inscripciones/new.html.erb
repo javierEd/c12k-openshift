@@ -1,0 +1,50 @@
+<% content_for :titulo_pagina do %>Inscribirse<% end %>
+<% content_for :titulo_bloque do %>Inscribirse<% end %>
+
+<%= form_for @inscripcion, url:  inscripciones_path, remote: true, html: { id: 'inscripcion', 'data-type' => :json}, :builder => FormHelper::SFormBuilder do |f|  %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  
+  <%= seccion 'Datos personales' do %>
+    <%= f.campo_texto :doc_id, autofocus: true, autocomplete: "off", label: 'Cedula o pasaporte', placeholder: 'V-00000000' %>
+    <%= f.campo_texto :nombres, autocomplete: "off", placeholder: 'Juan' %>
+    <%= f.campo_texto :apellidos, autocomplete: "off", placeholder: 'Perez' %>
+    <%= f.campo_selec :genero, :opciones => [['Seleccione',''],['Hombre',1],['Mujer',2]], label: 'Sexo' %>
+    <%= f.campo_fecha :fecha_nac, :autocomplete => "off", :yearRange => "-100:+0", :desde => Date.new(1915,01,01), :hasta => Date.new(1999,12,31), label: 'Fecha de nacimiento', 'validar-con-ruta' => mostrar_categoria_path, params: 'fecha_nac silla_ruedas' %>
+    <%= f.campo_selec :talla_camisa, opciones: select_tallas_camisas, label: 'Talla de camisa' %>
+  <% end %>
+
+  <%= seccion 'Datos de ubicación' do %>
+    <%= f.campo_texto :email, autocomplete: "off", label: 'Correo electrónico', placeholder: 'foo@bar.baz' %>
+    <%= f.campo_texto :tlf_movil, autocomplete: "off", label: 'Teléfono movil', placeholder: '00000000000' %>
+    <%= f.campo_texto :tlf_fijo, autocomplete: "off", label: 'Teléfono fijo', placeholder: '00000000000' %>
+    <%= f.campo_selec :pais, opciones: select_paises, label: 'País' %>
+    <%= f.campo_texto :estado, autocomplete: "off", label: 'Estado' %>
+  <% end %>
+  
+  <%= seccion 'Datos de la categoria' do %>
+    <%= f.campo_checkbox :silla_ruedas, label: '¿Posee actualmente silla de ruedas?', 'validar-con-ruta' => mostrar_categoria_path, params: 'fecha_nac silla_ruedas' %>
+    <%= f.campo_texto :edad, readonly: true %>
+    <%= f.campo_texto :categoria, readonly: true %>
+  <% end %>
+  
+    <%= seccion 'Datos del pago' do %>
+    <%= f.campo_selec :tipo_transaccion, opciones: [['Seleccione',''],['Deposito','deposito'],['Transferencia','transferencia']], label: 'Tipo de transacción' %>
+    <%= f.campo_fecha :fecha_transaccion, :autocomplete => "off", :yearRange => "-100:+0", :desde => Date.new(2015,10,3), :hasta => Date.today, label: 'Fecha de la transacción'  %>
+    <%= f.campo_texto :nro_transaccion, autocomplete: "off", label: 'Nº de Deposito o Transferencia' %>
+    <%= f.campo_areatexto :adicional_transaccion, label: 'Información adicional de la transacción' %>
+  <% end %>
+  
+  <%= seccion 'Responda la siguiente pregunta' do %>
+    <%= f.campo_texto :humanizer_answer, :label => @inscripcion.humanizer_question, :autocomplete => "off" %>
+    <%= f.hidden_field :humanizer_question_id %>
+  <% end %>
+  
+  <%= seccion 'Información legal' do %>
+    <%= link_to 'Terminos y Condiciones', '#', target: '_blank' %> | <%= link_to 'Liberación de Responsabilidad', '#', target: '_blank' %>
+    <%= f.campo_checkbox :ent_terminos, :label => 'He Leido y Aceptado los Terminos y Condiciones' %>
+    <%= f.campo_checkbox :ent_liberacion, :label => 'He Leido y Aceptado la Liberación de Responsabilidad' %>
+  <% end %>
+  
+  <%= f.boton_enviar 'enviar','Enviar','paper-plane' %>
+<% end %>

@@ -1,0 +1,94 @@
+
+form /*div[id^=campo_]*/  {
+    margin: 10px auto;
+}
+
+form div[id^=campo_] {
+}
+
+form /*div[id^=campo_]*/ label {
+    font-weight: bold;
+}
+
+form /*div[id^=campo_]*/ input, select, form textarea,button {
+    font-weight: bold;
+    color: #444;
+    background-color: #F4F4F4;
+    border-radius: 6px;
+    border: 1px solid #BBB;
+    padding: 4px;
+    /*margin: 3px 2px;*/
+    width: 280px;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 45px;
+}
+
+form input:hover, form select:hover, form textarea:hover {
+    border: 1px solid #AAA;
+    box-shadow: 0 0 1px 1px #CCC;
+}
+
+form.tiene_errores > div.resumen_errores {
+    border: 1px #C00 solid;
+    border-radius: 5px;
+    background-color: #FFAAAA;
+    color: #500;
+    margin: 0 0 15px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+form /*div[id^=campo_]*/.tiene_errores {
+}
+
+form /*div[id^=campo_]*/.tiene_errores > .msg_error {
+    color: #a94442;
+    font-size: 11px;
+    display:block
+}
+
+form /*div[id^=campo_]*/.cargando {
+    border-radius: 5px;
+    background-color: #d5d5d5;
+    padding: 3px;
+}
+
+form /*div[id^=campo_]*/.cargando > .msg_error {
+    color: #333;
+    font-size: 11px;
+    display: block
+}
+
+form /*div[id^=campo_]*/ select.ci_field {
+    display: inline-block;
+    width: 60px
+}
+
+form /*div[id^=campo_]*/ input.ci_field {
+    display: inline-block;
+    width: calc(100% - 64px);
+}
+
+form /*div[id^=campo_]*/ input[type=checkbox]{
+    margin-right: 10px;
+    width: 18px;
+    padding: 0;
+}
+
+form div.subiendo_archivo {
+    border: 1px solid lightgrey;
+    padding: 6px;
+    border-radius: 6px;
+    margin: 5px 0;
+}
+
+form div.archivo_subido {
+    border: 1px solid lightslategrey;
+    padding: 6px;
+    border-radius: 6px;
+    margin: 5px 0;
+}

@@ -1,0 +1,14 @@
+<% content_for :titulo_pagina do %>Contenido > Archivos<% end %>
+<% content_for :titulo_bloque do %><%= link_to 'Contenido', contenido_index_path %> > Archivos<% end %>
+
+<%= boton_enlace 'Subir archivo', new_contenido_archivo_path, icono: 'plus' %>
+
+<% unless archivos.empty? %>
+  <%= rejilla ['Nombre','Tipo','...'] do |r| %>
+    <% archivos.each do |archivo| %>
+       <%= r.fila [ link_to(archivo.nombre, archivo_path(archivo._id), :target => '_blank'), archivo.tipo, link_to( 'editar', edit_contenido_archivo_path(archivo._id)) ] %>
+    <% end %>
+  <% end %>
+<% else %>
+  <div style="text-align: center; font-weight: bold; margin: 10px">No se han encontrado archivos.</div>
+<% end %>

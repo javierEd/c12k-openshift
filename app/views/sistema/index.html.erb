@@ -1,0 +1,7 @@
+<% content_for :titulo_pagina do %>Sistema<% end %>
+<% content_for :titulo_bloque do %>Sistema<% end %>
+
+<%= rejilla_botones do %>
+  <%= boton_enlace 'Cuentas de usuario', sistema_cuentas_path, tamanio: 'grande', icono: 'users' %>
+  <%= boton_enlace 'Roles', sistema_roles_path, tamanio: 'grande', icono: 'unlock-alt' %>
+<% end %>

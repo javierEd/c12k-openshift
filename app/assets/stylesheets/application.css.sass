@@ -1,0 +1,423 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require jquery-ui
+ */
+
+@import "jquery-ui"
+@import "font-awesome"
+@import "leaflet"
+@import "bootstrap-sprockets"
+@import "bootstrap"
+//@import "**/*"
+//@import "*"
+
+body 
+  font-family: sans-serif, arial
+  font-size: 13px
+  color: #222222
+  background-color: #eee
+  margin: 0
+  
+img
+  max-width: 100%
+
+#spinner 
+  position: fixed
+  width: 100%
+  height: 100%
+  z-index: 3000
+  background-color: rgba(0, 0, 0, 0.92)
+  visibility: hidden
+  opacity: 0
+  transition: all 0.5s
+
+#spinner > div 
+  color: #aaa
+  left: 50%
+  margin: -33px
+  position: absolute
+  top: 50%
+
+#wrapper 
+  position: absolute
+  top: 0
+  bottom: 170px
+  left: 0
+  right: 0
+
+p
+  margin: 5px 0
+  
+  
+a 
+  text-decoration: none
+  color: #555
+
+a:hover 
+  color: #333
+  text-decoration: underline
+
+#cabezal 
+  top: 0
+  width: 100%
+  z-index: 2000
+  transition: all 0.2s
+  font-weight: bold
+  font-size: 14px
+  text-transform: uppercase
+  a
+    color: #DEDEDE
+    &:hover
+      background-color: #DEDEDE
+      color: #44008E
+  ul.navbar-right > li > ul > li
+    text-align: right
+    
+#menuprincipal
+  border-radius: 0
+
+#titulo 
+  float: left
+  transition: all 0.2s
+  text-align: center
+  margin: 2px
+  border: 1px solid white
+  border-radius: 5px
+
+#titulo img.logo 
+  display: block
+  height: 44px
+  margin: 0 auto
+  transition: all 0.2s
+
+#titulo img.titulo 
+  height: 24px
+
+#titulo a 
+  display: block
+  padding: 6px 15px
+  transition: all 0.2s
+
+#titulo:hover 
+  background-color: #fff
+  border: 1px solid lightgrey
+
+#cuerpo 
+  min-height: calc(100% - 139px)
+  width: 1300px
+  margin: 10px auto 0
+
+.bloque 
+  background-color: #f3f3f3
+  border-radius: 8px
+  box-shadow: 2px 2px 3px 2px #AAA
+  margin: 0 0 10px 0
+
+.bloque_transparente 
+  margin: 0 0 10px 0
+
+.bloque_transparente .bloque_titulo 
+  padding: 0 !important
+
+.bloque_transparente .bloque_contenido  
+  padding: 0 !important
+
+.bloque_titulo 
+  color: #333
+  font-size: 20px
+  font-weight: bold
+  padding: 10px
+  text-overflow: ellipsis
+  overflow: hidden
+
+.bloque_contenido 
+  padding: 10px 10px
+
+.lateral 
+  width: 300px
+
+.lateral .bloque_titulo 
+  font-size: 16px
+  margin: 0
+  padding: 10px
+  text-overflow: ellipsis
+  overflow: hidden
+
+#bloques_izq 
+  margin: 0 10px 0 0
+
+#bloques_der 
+  margin: 0 0 10px 10px
+
+#contenedor_cen 
+  display: flex
+
+#contenedor_pri 
+  width: 1300px
+
+#bloque_pri 
+  height: calc(100% - 20px)
+
+.reducido_pri 
+  width: 990px !important
+
+.masreducido_pri 
+  width: 680px !important
+
+#pie 
+  width: 100%
+  background-color: #666
+  font-weight: bold
+  color: white
+
+#menuinferior 
+  display: inline-flex
+  text-transform: uppercase
+
+#menuinferior a 
+  display: block
+  padding: 12px 15px
+  color: #efefef
+  font-weight: bold
+  text-decoration: none
+
+#menuinferior a:hover 
+  background-color: #333
+  color: white
+
+#menulocalizacion 
+  float: right
+  margin: 0 0 0 25px
+  color: white
+  text-transform: capitalize
+
+#menulocalizacion ul 
+  list-style-type: none
+  margin: 0
+  padding: 0
+
+#menulocalizacion li 
+  float: left
+
+#menulocalizacion a 
+  color: #efefef
+  padding: 12px
+  display: block
+  float: left
+  transition: all 0.2s
+  text-decoration: none
+
+#menulocalizacion a:hover 
+  background-color: #333
+  color: white
+
+#menulocalizacion li.expandible 
+  direction: rtl
+
+#menulocalizacion li.expandible > ul 
+  display: none
+  background: #078081
+  transition: all 0.2s
+
+#menulocalizacion li.expandible > ul > li 
+  transition: all 0.2s
+  float: none
+
+#menulocalizacion li.expandible:hover > ul 
+  display: block
+  transition: all 0.2s
+  position: fixed
+  top: 90px
+  float: none
+
+#resumen 
+  color: #BBB
+  font-weight: normal
+  padding: 20px
+  text-align: center
+  background-color: #111
+  font-size: 12px
+  a
+    color: #cdcdcd
+    &:hover 
+      color: efefef
+
+.post 
+  margin: 15px 0
+  border-bottom: 2px solid lightgray
+
+.post > .titulo 
+  font-size: 18px
+  font-weight: bold
+  margin-bottom: 15px
+  text-overflow: ellipsis
+  overflow: hidden
+
+.post > .autor 
+  text-align: right
+  margin-bottom: 15px
+
+.post > .contenido 
+  background-color: #fcfcfc
+  border-radius: 8px
+  margin-bottom: 15px
+  padding: 8px
+  display: inline-block
+  width: calc(100% - 16px)
+  font-size: 14px
+  line-height: 1.7em
+  text-overflow: ellipsis
+  overflow: hidden
+
+.post > .contenido p 
+  margin: 8px 0
+
+.post > .contenido img 
+  border: 1px solid #eee
+  padding: 3px
+  margin: 3px
+  max-width: calc(100% - 12px)
+
+.post > .adjuntos 
+  margin-bottom: 15px
+
+.post > .adjuntos > .adjunto 
+  border: 1px solid lightslategrey
+  padding: 6px
+  border-radius: 6px
+  margin: 5px 0
+
+.post > .etiquetas 
+  margin-bottom: 15px
+
+.post > .etiquetas > a 
+  margin-right: 17px
+
+.post > .pie 
+  display: inline-block
+  width: 100%
+  margin-bottom: 15px
+
+.paginacion 
+  text-align: center
+  margin: 17px
+
+.paginacion a 
+  font-weight: bold
+  margin: 0 15px
+  font-size: 14px
+
+.acordion > h3
+  font-weight: bold
+  font-size: 15px
+
+.btn
+  font-weight: bold
+  margin: 0 0 4px 0
+
+.btn-default
+  color: #666!important
+  
+.boton_grande
+  padding: 10px
+  i
+    display: block
+
+.rejilla_botones > .btn
+  width: 180px
+  
+.rejilla
+  .rejilla-titulos
+    display: flex
+    div
+      background-color: #fff
+      text-align: center
+      font-weight: bold
+      padding: 5px 10px
+      margin: 2px
+      width: 100%
+      &.rejilla-celda-izq
+        border-top-left-radius: 10px
+      &.rejilla-celda-der
+        border-top-left-radius: 10px
+  .rejilla-filas
+    div
+      display: flex
+      div
+        font-weight: bold
+        background-color: #eee
+        padding: 10px
+        margin: 2px
+        width: 100%
+    
+
+.notificacion
+  position: absolute
+  top: 70px
+  left: 450px
+  right: 450px
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.9)
+  font-weight: bold
+  z-index: 1000
+  
+.close
+  width: 15px
+  
+.navbar-inverse
+  background-color: #44008E
+  border-color: #44008E
+    
+@media only screen and (min-width: 1260px) and (max-width: 1339px)
+
+  #cuerpo
+    width: 1240px
+  
+  #contenedor_pri 
+    width: 1240px
+  
+  .reducido_pri 
+    width: 930px !important
+  
+  .masreducido_pri 
+    width: 620px !important
+  
+@media only screen and (max-width: 1259px)
+  
+  #cuerpo 
+    width: 100%
+  
+  #contenedor_pri 
+    width: 100%
+  
+  .reducido_pri 
+    width: calc(100% - 310px) !important
+  
+  .masreducido_pri 
+    width: calc(100% - 620px)  !important
+  
+@media only screen and (max-width: 749px)
+
+  #contenedor_cen 
+    display: block !important
+  
+  .reducido_pri 
+    width: 100% !important
+  
+  .masreducido_pri 
+    width: 100% !important
+  
+  #bloques_der 
+    width: 100%
+    margin: 0

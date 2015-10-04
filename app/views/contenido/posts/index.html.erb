@@ -1,0 +1,14 @@
+<% content_for :titulo_pagina do %>Contenido > Publicaciones<% end %>
+<% content_for :titulo_bloque do %><%= link_to 'Contenido', contenido_index_path %> > Publicaciones<% end %>
+
+<%= boton_enlace 'Nueva publicación', new_contenido_post_path, icono: 'plus' %>
+
+<% unless posts.empty? %>
+  <%= rejilla ['Titulo','Publicado','Estado','...'] do |r| %>
+    <% posts.each do |post| %>
+      <%= r.fila [link_to(post.titulo, post_path(post._id), :target => '_blank'), post.fecha_publicado ? 'hace '+time_ago_in_words(post.fecha_publicado, include_seconds: true):'no', post.bloqueado ? 'bloqueado por el admin' : ( post.publicado && post.aprobado ? 'publicado y aprobado' : ( post.publicado ? 'publicado' : ( post.aprobado ? 'aprobado' : 'no publicado' ) ) ), link_to('Editar', edit_contenido_post_path(post._id))] %>
+    <% end %>
+  <% end %>
+<% else %>
+  <div style="text-align: center; font-weight: bold; margin: 10px">No se han encontrado publicaciones.</div>
+<% end %>

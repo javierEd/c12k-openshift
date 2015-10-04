@@ -1,0 +1,18 @@
+<% content_for :titulo_pagina do %>Contacto<% end %>
+<% content_for :titulo_bloque do %>Contacto<% end %>
+
+<%= form_for @contacto, url:  contacto_index_path, remote: true, html: { id: 'contacto', 'data-type' => :json}, :builder => FormHelper::SFormBuilder do |f|  %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  <% unless cuenta_signed_in? %>
+    <%= f.campo_texto :nombre, autofocus: true, autocomplete: "off"  %>
+    <%= f.campo_texto :email, autofocus: true, autocomplete: "off"  %>
+  <% end %>
+  <%= f.campo_texto :asunto, autofocus: true, autocomplete: "off"  %>
+  <%= f.campo_areatexto :mensaje %>
+  <%= seccion 'Responda la siguiente pregunta' do %>
+    <%= f.campo_texto :humanizer_answer, :label => @contacto.humanizer_question, :autocomplete => "off" %>
+    <%= f.hidden_field :humanizer_question_id %>
+  <% end %>
+  <%= f.boton_enviar 'enviar','Enviar','paper-plane' %>
+<% end %>

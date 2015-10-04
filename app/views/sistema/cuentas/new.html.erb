@@ -1,0 +1,23 @@
+<% content_for :titulo_pagina do %>Sistema > Cuentas de usuario > Nueva<% end %>
+<% content_for :titulo_bloque do %><%= link_to 'Sistema', sistema_index_path %> > <%= link_to 'Cuentas de usuario', sistema_cuentas_path %> > Nueva<% end %>
+
+<%= form_for @cuenta, url:  sistema_cuentas_path, remote: true, html: { id: 'cuenta', 'data-type' => :json}, :builder => FormHelper::SFormBuilder  do |f|  %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  <%= seccion 'Información de la cuenta' do %>
+    <%= f.campo_texto :username, autofocus: true, autocomplete: "off", placeholder: 'juan123', label: 'Nombre de usuario'  %>
+    <%= f.campo_contrasenia :password, autocomplete: "off", placeholder: '********', label: 'Contraseña' %>
+    <%= f.campo_contrasenia :password_confirmation, autocomplete: "off", placeholder: '********', label: 'Confirmar contraseña' %>
+    <%= f.campo_selec :ent_rol, :opciones => opciones_roles, label: 'Rol' %>
+  <% end %>
+  <%= seccion 'Información personal' do %>
+    <%= f.campo_texto :ent_doc_id, autocomplete: "off", placeholder: 'V-00000000-0', label: 'C.I. o R.I.F.' %>
+    <%= f.campo_texto :ent_nombre, :autocomplete => "off", label: 'Nombre' %>
+    <%= f.campo_texto :ent_apellidos, :autocomplete => "off", label: 'Apellidos' %>
+    <%= f.campo_fecha :ent_fecha_nac, :autocomplete => "off", :yearRange => "-100:+0", :desde => Date.new(1915,01,01), :hasta => Date.today, label: 'Fecha de nacimiento' %>
+    <%= f.campo_selec :ent_sexo, :opciones => [['Seleccione',''],['Hombre',1],['Mujer',2]], label: 'Sexo' %>
+    <%= f.campo_texto :ent_email, :autocomplete => "off", label: 'Correo electrónico' %>
+    <%#= f.campo_selec :ent_pais, :opciones => select_paises, label: 'País' %>
+  <% end %>
+  <%= f.boton_enviar 'enviar','Enviar','user-plus' %>
+<% end %>

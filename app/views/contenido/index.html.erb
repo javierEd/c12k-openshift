@@ -1,0 +1,9 @@
+<% content_for :titulo_pagina do %>Contenido<% end %>
+<% content_for :titulo_bloque do %>Contenido<% end %>
+
+<%= rejilla_botones do %>
+  <%= boton_enlace 'Publicaciones', contenido_posts_path, tamanio: 'grande', icono: 'file-text' %>
+  <%= boton_enlace 'Archivos', contenido_archivos_path, tamanio: 'grande', icono: 'file' %>
+  <%= boton_enlace 'Menús', contenido_menus_path, tamanio: 'grande', icono: 'bars' %>
+  <%= boton_enlace 'Bloques', contenido_bloques_path, tamanio: 'grande', icono: 'th-large' %>
+<% end %>

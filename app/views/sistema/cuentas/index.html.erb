@@ -1,0 +1,12 @@
+<% content_for :titulo_pagina do %>Sistema > Cuentas de usuario<% end %>
+<% content_for :titulo_bloque do %><%= link_to 'Sistema', sistema_index_path %> > Cuentas de usuario<% end %>
+
+<%= boton_enlace 'Nueva cuenta de usuario', new_sistema_cuenta_path, icono: 'user-plus' %>
+
+<% unless cuentas.empty? %>
+  <%= rejilla ['nombre de usuario','rol','ultima sesión','...'] do |r| %>
+    <% cuentas.each do |cuenta| %>
+      <%= r.fila [cuenta.username,cuenta.nombre_rol, cuenta.last_sign_in_at, link_to('Editar', sistema_cuenta_path(cuenta._id))] %>
+    <% end %>
+  <% end %>
+<% end %>

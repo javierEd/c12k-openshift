@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title><%= yield(:titulo_pagina).present? ? titulo+' | '+yield(:titulo_pagina) : titulo %></title>
+    <link rel="shortcut icon" href="/favicon.png" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= yield(:head) %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="spinner"><div><%=fa_icon 'spinner pulse 5x'%></div></div>
+    <div id="wrapper">
+      <div id="cabezal">
+        <% if banner_src %>
+          <div id="banner" style="background: url('<%= banner_src %>') no-repeat scroll center; height: 150px"></div>
+        <% end %>
+        <div id="menuprincipal" class="navbar navbar-inverse">
+          <div class="container">
+            <div class="navbar-header">
+              <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <% unless banner_src %>
+                <%= link_to titulo, root_path, class: 'navbar-brand' %>
+              <% end %>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><%= link_to 'inicio', root_path %></li>
+                <% obt_menu_superior.each do |elemento| %>
+                  <li><%= link_to elemento.titulo, elemento.enlace, target: elemento.target %></li>
+                <% end %>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <% if cuenta_signed_in? %>
+                  <li class="dropdown">
+                    <%= link_to current_cuenta.username.html_safe + ' <span class="caret"></span>'.html_safe, '#', 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'role' => 'button', 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'  %>
+                    <ul class="dropdown-menu">
+                      <% if tiene_permiso?('contenido') %>
+                        <li><%= link_to 'Contenido '.html_safe+fa_icon("file-text-o fw"), contenido_index_path %></li>
+                      <% end %>
+                      <% if current_cuenta.administrador %>
+                        <li class="divider" role="separator"></li>
+                        <li><%= link_to 'Sistema '.html_safe+fa_icon("sliders fw"), sistema_index_path %></li>
+                      <% end %>
+                      <li class="divider" role="separator"></li>
+                      <li><%= link_to 'Cambiar contraseña '.html_safe+fa_icon("key fw"), cambiar_contrasenia_path %></li>
+                      <li class="divider" role="separator"></li>
+                      <li><%= link_to 'Cerrar sesión '.html_safe+fa_icon("sign-out fw"),  destroy_cuenta_session_path, :method => :delete %></li>
+                    </ul>
+                  </li>
+                <% else %>
+                  <li><%= link_to fa_icon("sign-in lg", style: 'font-size: 1.8em'), new_cuenta_session_path, :title => 'iniciar sesión' %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% if notice %>
+        <div class="notificacion alert alert-success fade in" role="alert">
+          <button class="close" aria-label="Close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">×</span>
+          </button>
+          <%= notice %>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="notificacion alert alert-danger fade in" role="alert">
+          <button class="close" aria-label="Close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">×</span>
+          </button>
+          <%= alert %>
+        </div>
+      <% end %>
+      <div id="cuerpo">
+        <% if @bloques_sup %>
+          <div id="bloques_sup">
+            <% @bloques_sup.each do |bloque| %>
+              <div class="<%= bloque[:transparente] ? 'bloque_transparente' : 'bloque' %>">
+                <% if bloque[:titulo] %>
+                  <div class="bloque_titulo">
+                    <%= bloque[:titulo] %>
+                  </div>
+                <% end %>
+                <div class="bloque_contenido">
+                  <%= bloque[:contenido] %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        <div id="contenedor_cen">
+        <% if @bloques_izq %>
+          <div id="bloques_izq" class="lateral">
+            <% @bloques_izq.each do |bloque| %>
+              <div class="bloque">
+                <% if bloque[:titulo] %>
+                  <div class="bloque_titulo">
+                    <%= bloque[:titulo] %>
+                  </div>
+                <% end %>
+                <div class="bloque_contenido">
+                  <%= bloque[:contenido] %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        <% if (bloque_existe?('izq') || @bloques_izq) && (bloque_existe?('der') || @bloques_der) %>
+          <div id="contenedor_pri" class="masreducido_pri">
+        <% elsif @bloques_izq || @bloques_der || bloque_existe?('izq') || bloque_existe?('der') %>
+          <div id="contenedor_pri"  class="reducido_pri">
+        <% else %>
+          <div id="contenedor_pri" >
+        <% end %>
+        <% if yield.present? || content_for?(:titulo_bloque) %>
+          <div id="bloque_pri" class="bloque">
+            <% if content_for?(:titulo_bloque) %>
+              <div class="bloque_titulo">
+                <%= yield(:titulo_bloque) %>
+              </div>
+            <% end %>
+            <div class="bloque_contenido">
+              <%= yield %>
+            </div>
+          </div>
+        <% end %>
+        <% if @bloques_pri %>
+          <% @bloques_pri.each do |bloque| %>
+            <div class="bloque">
+                <% if bloque[:titulo] %>
+                  <div class="bloque_titulo">
+                    <%= bloque[:titulo] %>
+                  </div>
+                <% end %>
+                <div class="bloque_contenido">
+                  <%= bloque[:contenido] %>
+                </div>
+            </div>
+          <% end %>
+          </div>
+        <% end %>
+        </div>
+        <% if @bloques_der || bloque_existe?('der') %>
+          <div id="bloques_der" class="lateral">
+            <% if @bloques_der %>
+              <% @bloques_der.each do |bloque| %>
+                <div class="bloque">
+                  <% if bloque[:titulo] %>
+                    <div class="bloque_titulo">
+                      <%= bloque[:titulo] %>
+                    </div>
+                  <% end %>
+                  <div class="bloque_contenido">
+                    <%= bloque[:contenido] %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+            <% if bloque_existe?('der') %>
+              <% obt_bloques('der').each do |bloque| %>
+                <div class="<%= bloque.transparente ? 'bloque_transparente' : 'bloque' %>">
+                  <% if bloque.mostrar_titulo %>
+                    <div class="bloque_titulo">
+                      <%= bloque.titulo.html_safe %>
+                    </div>
+                  <% end %>
+                  <div class="bloque_contenido">
+                    <%= bloque.contenido.html_safe %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+        </div>
+        <% if @bloques_inf %>
+          <div id="bloques_inf">
+            
+              <% @bloques_inf.each do |bloque| %>
+                <div class="bloque">
+                  <% if bloque[:titulo] %>
+                    <div class="bloque_titulo">
+                      <%= bloque[:titulo] %>
+                    </div>
+                  <% end %>
+                  <div class="bloque_contenido">
+                    <%= bloque[:contenido] %>
+                  </div>
+                </div>
+              <% end %>
+            
+          </div>
+        <% end %>
+      </div>
+      <div id="pie">
+        <div id="menuinferior">
+          <% obt_menu_inferior.each do |elemento| %>
+            <%= link_to elemento.titulo, elemento.enlace, target: elemento.target %>
+          <% end %>
+          <%#= link_to 'contacto', new_contacto_path %>
+        </div>
+        <div id="resumen"><%= resumen %></div>
+      </div>
+    </div>
+    <% if AppConfig.aplicacion.disqus.enable == true %>
+      <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = '<%= AppConfig.aplicacion.disqus.shortname %>';
+        
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+      </script>
+    <% end %>
+  </body>
+</html>

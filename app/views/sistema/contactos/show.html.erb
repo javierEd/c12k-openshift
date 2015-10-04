@@ -1,0 +1,28 @@
+<% content_for :titulo_pagina do %>Sistema > Mensajes de contacto > Ver<% end %>
+<% content_for :titulo_bloque do %><%= link_to 'Sistema', sistema_index_path %> > <%= link_to 'Mensajes de contacto', sistema_contactos_path %> > Ver<% end %>
+
+<div>Fecha: <b><%= contacto.creado.fecha %></b></div><br/>
+<div>Remitente: <b><%= contacto.remitente %></b></div><br/>
+<div>Asunto: <b><%= contacto.asunto %></b></div><br/>
+<div><%= contacto.mensaje %></div><br/>
+
+<%= seccion 'Respuestas enviadas' do %>
+  <% if respuestas.empty? %>
+    <div style="text-align: center; font-weight: bold; margin: 10px">No se han enviado respuestas.</div>
+  <% else %>
+    <% respuestas.each do |respuesta| %>
+      <div>Fecha: <b><%= respuesta.creado.fecha %></b></div><br/>
+      <div><%= respuesta.mensaje %></div><br/>
+      <br/>
+    <% end %>
+  <% end %>
+<% end %>
+  
+<%= seccion 'Enviar respuesta' do %>
+  <%= form_for @respuesta, url: sistema_contacto_path(params[:id]), remote: true, html: { id: 'contacto_respuesta', method: 'patch', 'data-type' => :json}, :builder => FormHelper::SFormBuilder  do |f|  %>
+    <%= f.iniciar_sformjs %>
+    <%= f.resumen_errores %>
+    <%= f.campo_areatexto :mensaje %>
+    <%= f.boton_enviar 'responder','Responder','reply' %>
+  <% end %>
+<% end %>

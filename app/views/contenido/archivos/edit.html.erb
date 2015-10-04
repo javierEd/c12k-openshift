@@ -1,0 +1,10 @@
+<% content_for :titulo_pagina do %>Contenido > Archivos > Editar<% end %>
+<% content_for :titulo_bloque do %><%=link_to 'Contenido', contenido_index_path %> > <%=link_to 'Archivos', contenido_archivos_path %> > Editar<% end %>
+
+<%= form_for @archivo, url: contenido_archivo_path(params[:id]), remote: true, html: { id: 'archivo', method: :patch, 'data-type' => :json}, :builder => FormHelper::SFormBuilder do |f| %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  <%= f.campo_texto :nombre, autofocus: true, autocomplete: "off"  %>
+  <%= f.campo_checkbox :borrado, :label => 'Eliminar', :confirmar => '¿Esta seguro que desea eliminar definitivamente este archivo?' %>
+  <%= f.boton_enviar 'enviar','Enviar','plus' %>
+<% end %>

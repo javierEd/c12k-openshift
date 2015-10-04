@@ -1,0 +1,15 @@
+ <% if defined? archivo %>
+  <% content_for :titulo_pagina do 'Ver archivo: '+archivo.archivo_file_name end %>
+  <% content_for :titulo_bloque do %><%= 'Ver archivo: '+archivo.archivo_file_name %><% end %>
+
+  <% arr_tipo = archivo.tipo.split('/') %>
+  <% if arr_tipo[0]== 'image' %>
+    <div style="text-align: center"><%= image_tag archivo_url, :style => 'max-width: 100%;' %></div>
+  <% elsif arr_tipo[1] == 'pdf'  %>
+    <div style="text-align: center"><iframe src="<%= archivo_url+'/?ver=1' %>" style= "width:970px;max-width: 100%;height:500px" frameborder="0" ></iframe></div>
+  <% end %>
+  <div style="margin:20px; text-align: center; font-weight: bold;font-size: 14px"><%= link_to( 'descargar archivo '.html_safe+fa_icon('download lg'), archivo_url+'/?descargar=1') %></div>
+<% else %>
+  <% content_for :titulo_pagina do 'no se he encontrado el archivo' end %>
+  no se he encontrado el archivo
+<% end %>

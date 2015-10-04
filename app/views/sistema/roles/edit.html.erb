@@ -1,0 +1,20 @@
+<% content_for :titulo_pagina do %>Sistema > Roles > Editar: <%= @rol.nombre %><% end %>
+<% content_for :titulo_bloque do %><%= link_to 'Sistema', sistema_index_path %> > <%= link_to 'Roles', sistema_roles_path %> > Editar: <%= @rol.nombre %><% end %>
+
+<%= form_for @rol, url:  sistema_rol_path(params[:id]), remote: true, html: { id: 'rol', method: 'patch', 'data-type' => :json}, :builder => FormHelper::SFormBuilder  do |f|  %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  
+  <% AppConfig.aplicacion.permisos.each do |p| %>
+    <%= seccion p['nombre'] do %>
+      <% f.fields_for :ent_permisos do |x| %>
+        <% x.fields_for p['id'] do |y| %>
+          <% p['controladores'].each do |c| %>
+            <%= y.campo_checkbox c['id'], label: c['nombre'], checked: (@rol.ent_permisos[p['id']] && @rol.ent_permisos[p['id']][c['id']] ? true : false ) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%= f.boton_enviar 'enviar','Enviar','plus' %>
+<% end %>

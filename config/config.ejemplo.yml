@@ -1,0 +1,95 @@
+configuracion:
+    
+    servidor:
+#        appserver: unicorn
+#        puerto: 3000
+#        binding: localhost
+#        entorno: development
+#        worker_processes: 2
+#        timeout: 120
+
+        ## Basado en la configuraciín del mailer de Diaspora
+        mail: ## Section
+  
+            ## First you need to enable it.
+            #enable: true
+    
+            ## Sender address used in mail sent by Diaspora
+            #sender_address: 'no-reply@example.org'
+            
+            ## This selects which mailer should be used. Use 'smtp' for a smtp
+            ## connection, 'sendmail' to use the sendmail binary or
+            ## 'messagebus' to use the messagebus service.
+            #method: 'smtp'
+            
+            ## Ignore if method isn't 'smtp'
+            smtp: ## Section
+
+                ## Host and port of the smtp server handling outgoing mail.
+                ## This should match the common name of the certificate sent by
+                ## the SMTP server, if it sends one. (default port=587)
+                #host: 'smtp.example.org'
+                #port: 587
+                
+                ## Authentication required to send mail (default='plain')
+                ## Use one of 'plain', 'login' or 'cram_md5'. Use 'none'
+                ## if server does not support authentication.
+                #authentication: 'plain'
+                
+                ## Credentials to log in to the SMTP server
+                ## May be necessary if authentication is not 'none'.
+                #username: 'change_me'
+                #password: 'change_me'
+                
+                ## Automatically enable TLS (default=true)
+                ## Leave this commented out if authentication is set to 'none'.
+                #starttls_auto: true
+                
+                ## The domain for the HELO command, if needed
+                #domain: 'smtp.example.org'
+                
+                ## OpenSSL verify mode used when connecting to a SMTP server with TLS
+                ## Set this to 'none' if you have a self-signed certificate. Possible
+                ## values: 'none', 'peer', 'client_once', 'fail_if_no_peer_cert'.
+                #openssl_verify_mode: 'none'
+            
+            ## Ignore if method isn't 'sendmail'
+            sendmail: ## Section
+
+                ## The path to the sendmail binary (default='/usr/sbin/sendmail')
+                #location: '/usr/sbin/sendmail'
+                
+                ## Use exim and sendmail (default=false)
+                #exim_fix: false
+             
+            ## Ignore if method isn't 'messagebus'
+            #message_bus_api_key: 'abcdef'
+
+    aplicacion:
+#        host: localhost
+#        url: http://localhost:3000
+#        titulo: 'LibreSIG'
+#        descripcion: 'Sistema de información Gerencial Libre'
+#        favicon_src: '/favicon.png'
+#        banner_src: '...'
+#        logo_src: ''
+#        resumen: '<div style="float: right"><a href="https://github.com./javierEd" target="_blank"><li class="fa fa-github fa-lg"></li> javierEd en GitHub</a></div>'
+
+#        archivos:
+#            directorio: 'uploads/files'
+#            papelera: 'uploads/trash/files'
+#            
+#        posts:
+#            directorio: 'uploads/posts'
+#            papelera: 'uploads/trash/posts'
+#            tamanio_resumen: 512
+#            por_pagina: 6
+
+#        Se implementan comentarios con Disqus
+#        disqus:
+#            enable: true
+#            shortname: '...'
+
+development:
+
+production:

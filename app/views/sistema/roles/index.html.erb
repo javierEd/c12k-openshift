@@ -1,0 +1,12 @@
+<% content_for :titulo_pagina do %>Sistema > Roles<% end %>
+<% content_for :titulo_bloque do %><%= link_to 'Sistema', sistema_index_path %> > Roles<% end %>
+
+<%= boton_enlace 'Nuevo rol', new_sistema_rol_path, icono: 'plus' %>
+
+<% unless roles.empty? %>
+  <%= rejilla ['Nombre','...'] do |r| %>
+    <% roles.each do |rol| %>
+      <%= r.fila [rol.nombre, link_to('Editar', edit_sistema_rol_path(rol._id))] %>
+    <% end %>
+  <% end %>
+<% end %>

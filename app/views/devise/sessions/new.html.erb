@@ -1,0 +1,45 @@
+<% content_for :titulo_pagina do %>Iniciar sesión<% end %>
+<% content_for :titulo_bloque do %>Iniciar sesión<% end %>
+
+<style>
+.form-signin {
+    margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin .checkbox {
+    font-weight: normal;
+}
+.form-signin .form-control {
+    box-sizing: border-box;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    position: relative;
+}
+.form-signin .form-control:focus, .form-signin .form-control:hover {
+    z-index: 2;
+}
+.form-signin input#cuenta_login {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: -4px;
+}
+.form-signin input#cuenta_password {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-bottom: 10px;
+}
+
+</style>
+
+<%= form_for(resource, as: resource_name, url:  cuenta_session_path , html: { :class => 'form-signin' } ) do |f| %>
+  <%= f.text_field :login, autofocus: true, class: 'form-control', placeholder: 'Nombre de usuario' %>
+
+  <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Contraseña' %>
+
+  <%= f.button fa_icon('sign-in lg fw') + " iniciar sesión", class: 'btn btn-lg btn-primary btn-block' %>
+<% end %>

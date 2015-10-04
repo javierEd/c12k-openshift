@@ -1,0 +1,28 @@
+<% content_for :titulo_pagina do %>Contenido > Menús<% end %>
+<% content_for :titulo_bloque do %><%= link_to 'Contenido', contenido_index_path %> > Menús<% end %>
+
+<%= seccion 'Elementos del Menú Superior' do |s| %>
+  <% unless menu_superior.nil? || menu_superior.elementos.nil? %>
+    <%= rejilla ['Nombre','Ruta','...'] do |r| %>
+      <% menu_superior.elementos.each do |elemento| %>
+        <%= r.fila [elemento.titulo, elemento.enlace, link_to('Editar', edit_contenido_menu_elemento_path(1, elemento._id))] %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div style="text-align: center; font-weight: bold; margin: 10px">No se han encontrado.</div>
+  <% end %>
+  <%= boton_enlace 'Agregar', new_contenido_menu_elemento_path(1), icono: 'plus' %>
+<% end %>
+
+<%= seccion 'Elementos del Menú Inferior' do |s| %>
+  <% unless menu_inferior.nil? || menu_inferior.elementos.nil? %>
+    <%= rejilla ['Nombre','Ruta','...'] do |r| %>
+      <% menu_inferior.elementos.each do |elemento| %>
+        <%= r.fila [elemento.nombre, elemento.ruta, link_to('Editar', edit_contenido_menu_elementos_path(2, elemento._id))] %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div style="text-align: center; font-weight: bold; margin: 10px">No se han encontrado.</div>
+  <% end %>
+  <%= boton_enlace 'Agregar', new_contenido_menu_elemento_path(2), icono: 'plus' %>
+<% end %>

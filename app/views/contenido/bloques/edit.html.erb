@@ -1,0 +1,25 @@
+<% content_for :titulo_pagina do %>Contenido > Bloques > Editar<% end %>
+<% content_for :titulo_bloque do %><%=link_to 'Contenido', contenido_index_path %> > <%=link_to 'Bloques', contenido_bloques_path %> > Editar<% end %>
+
+<script type="text/javascript">
+  CKEDITOR.replace('bloque_contenido')
+</script>
+
+<%= form_for @bloque, url: contenido_bloque_path(params[:id]), remote: true, html: { id: 'bloque', method: :patch, 'data-type' => :json}, :builder => FormHelper::SFormBuilder do |f| %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  <%= f.campo_texto :titulo, autofocus: true, autocomplete: "off" %>
+  <%= f.campo_checkbox :mostrar_titulo, label: 'Mostrar título' %>
+  <%= f.campo_ckareatexto :contenido, :label => 'Contenido', :ckeditor => {:language => 'es', :toolbar => [['Source'],
+      ['Cut','Copy','Paste', 'PasteText', 'PasteFromWord','-','Undo','Redo'],['Find', 'Replace', '-', 'SelectAll'],['Scayt'],[ 'Link', 'Unlink', 'Anchor' ],['Image','Youtube'],
+      ['HorizontalRule'],['Smiley', 'SpecialChar'],['CodeSnippet'],[ 'About' ],
+      '/',['FontSize' ],['Bold', 'Italic','Underline','Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
+      ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],[ 'NumberedList', 'BulletedList'],[ 'TextColor', 'BGColor' ]]} %>
+  <%= f.campo_archivo :ent_archivos, :label => 'Archivos adjuntos', :ajax => true, :multiple => true %>
+  <%= f.campo_checkbox :transparente, label: 'Transparente' %>
+  <%= f.campo_checkbox :publicado, label: 'Publicar' %>
+  <%= f.campo_selec :ubicacion, opciones: [['Seleccione',''],['Superior','sup'], ['Izquierdo','izq'], ['Derecho','der'], ['Inferior','inf']], label: 'Ubicación' %>
+  <%= f.campo_numerico :posicion, autocomplete: "off" %>
+  <%= f.campo_checkbox :borrado, :label => 'Eliminar', :confirmar => '¿Esta seguro que desea eliminar definitivamente este bloque?'  %>
+  <%= f.boton_enviar 'enviar','Enviar','plus' %>
+<% end %>

@@ -1,0 +1,12 @@
+<% content_for :titulo_pagina do %>Contenido > Menús > Editar elemento en Menú <%= params[:menu_id] == '1' ? 'superior' : 'inferior' %><% end %>
+<% content_for :titulo_bloque do %><%=link_to 'Contenido', contenido_index_path %> > <%=link_to 'Menús', contenido_menus_path %> > Editar elemento en Menú <%= params[:menu_id] == '1' ? 'superior' : 'inferior' %><% end %>
+
+<%= form_for @elemento_menu, url: contenido_menu_elemento_path(params[:menu_id],params[:id]), remote: true, html: { id: 'embed_elemento_menu',  method: :patch, 'data-type' => :json}, :builder => FormHelper::SFormBuilder do |f| %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  <%= f.campo_texto :titulo, autofocus: true, autocomplete: "off" %>
+  <%= f.campo_texto :enlace, autocomplete: "off" %>
+  <%= f.campo_selec :target, opciones: [['Normal',''],['Nueva ventana','_blank']] %>
+  <%= f.campo_numerico :posicion, autocomplete: "off" %>
+  <%= f.boton_enviar 'enviar','Enviar','plus' %>
+<% end %>

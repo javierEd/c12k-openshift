@@ -1,0 +1,7 @@
+<% content_for :titulo_pagina do %>Contenido > Archivos > Subir<% end %>
+<% content_for :titulo_bloque do %><%=link_to 'Contenido', contenido_index_path %> > <%=link_to 'Archivos', contenido_archivos_path %> > Subir<% end %>
+
+<%= form_for @archivo, url:  contenido_archivos_path, remote: true, html: { id: 'archivo', 'data-type' => :json}, :builder => FormHelper::SFormBuilder  do |f|  %>
+  <%= f.iniciar_sformjs %>
+  <%= f.campo_archivo :ent_archivos, :label => 'Archivos', :ajax => true, :multiple => true %>
+<% end %>

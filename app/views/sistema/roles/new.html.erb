@@ -1,0 +1,22 @@
+<% content_for :titulo_pagina do %>Sistema > Roles > Nuevo<% end %>
+<% content_for :titulo_bloque do %><%= link_to 'Sistema', sistema_index_path %> > <%= link_to 'Roles', sistema_roles_path %> > Nuevo<% end %>
+
+<%= form_for @rol, url:  sistema_roles_path, remote: true, html: { id: 'rol', 'data-type' => :json}, :builder => FormHelper::SFormBuilder  do |f|  %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  <%= f.campo_texto :nombre, autofocus: true, autocomplete: "off"  %>
+  
+  <% AppConfig.aplicacion.permisos.each do |p| %>
+    <%= seccion p['nombre'] do %>
+      <% f.fields_for :ent_permisos do |x| %>
+        <% x.fields_for p['id'] do |y| %>
+          <% p['controladores'].each do |c| %>
+            <%= y.campo_checkbox c['id'], label: c['nombre'] %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  
+  <%= f.boton_enviar 'enviar','Enviar','plus' %>
+<% end %>

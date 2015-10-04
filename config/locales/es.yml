@@ -1,0 +1,5 @@
+es:
+  devise:
+    failure:
+      invalid: Nombre de usuario o contraseña inválidos.
+      unauthenticated: Tienes que iniciar sesión para poder continuar.

@@ -1,0 +1,12 @@
+<% content_for :titulo_pagina do %>Sistema > Mensajes de contacto<% end %>
+<% content_for :titulo_bloque do %><%= link_to 'Sistema', sistema_index_path %> > Mensajes de contacto<% end %>
+
+<% unless contactos.empty? %>
+  <%= rejilla ['Fecha','Remitente','Asunto','...'] do |r| %>
+    <% contactos.each do |contacto| %>
+      <%= r.fila contacto %>
+    <% end %>
+  <% end %>
+<% else %>
+  <div style="text-align: center; font-weight: bold; margin: 10px"> No se han encontrado mensajes</div>
+<% end %>

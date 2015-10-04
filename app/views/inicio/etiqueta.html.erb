@@ -1,0 +1,53 @@
+<% if defined? etiqueta %>
+  <% content_for :titulo_pagina do 'Publicaciones con la etiqueta: '+etiqueta.nombre end %>
+  <% content_for :titulo_bloque do 'Publicaciones con la etiqueta: '+etiqueta.nombre end %>
+
+  <% unless posts.empty? %>
+    <style>
+        .post > .contenido img {
+            max-height: 100px !important;
+        }
+    </style>
+    <div class="posts">
+      <% posts.each do |post| %>
+        <div class="post">
+          <div class="titulo"><%= link_to post.titulo, post_path(post._id) %></div>
+          <% unless post.pagina_simple %>
+            <div class="autor">
+              hace <%= time_ago_in_words(post.fecha_publicado, include_seconds: true) %>,
+            por <%= link_to post.persona.username, perfil_path(post.persona.username), :style => 'font-weight: bold' %></div>
+          <% end %>
+          <div class="contenido"><%= truncate_html(post.leer_post.html_safe, length: AppConfig.aplicacion.posts.tamanio_resumen.to_i, omission: '...') %></div>
+          <div class="etiquetas"><% post.etiquetas.each do |etiqueta| %>
+              <%= link_to fa_icon('tag')+' '+etiqueta.nombre, etiqueta_path(etiqueta.nombre) %>
+          <% end %></div>
+          <div class="pie">
+            <% unless post.pagina_simple %>
+              <div style="float: left"><!-- <span style="margin-right: 15px;" title="calificación promedio">0 <%= fa_icon('trophy') %></span> -->
+                <span style="margin-right: 15px;" title="visitas">0 <%= fa_icon('users') %></span>
+                <% if AppConfig.aplicacion.disqus.enable %>
+                  <span style="margin-right: 15px;" title="comentarios"><span class="disqus-comment-count" data-disqus-url="<%= AppConfig.aplicacion.url + post_path(post._id) %>"></span> <%= fa_icon('comments') %></span>
+                <% end %>
+              </div>
+            <% end %>
+          <div style="float: right"><%= link_to 'seguir leyendo', post_path(post._id), :style => 'font-weight: bold' %></div></div>
+        </div>
+      <% end %>
+    </div>
+    <% if anterior || siguiente %>
+      <div class="paginacion">
+        <% if anterior %>
+          <%= link_to 'anterior '.html_safe+fa_icon('chevron-circle-left'), etiqueta_path(params[:consulta],anterior) %>
+        <% end %>
+        <% if siguiente %>
+          <%= link_to fa_icon('chevron-circle-right')+' siguiente'.html_safe, etiqueta_path(params[:consulta],siguiente) %>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    No se han encontrado publicaciones
+  <% end %>
+<% else %>
+  <% content_for :titulo_pagina do 'no se he encontrado la etiqueta' end %>
+  no se he encontrado la etiqueta
+<% end %>

@@ -1,0 +1,859 @@
+pordefecto:
+    
+    version: 0.0.0
+    
+    servidor:
+        
+        appserver: unicorn
+        
+        puerto: 3000
+        
+        binding: localhost
+        
+        entorno: development
+        
+        worker_processes: 2
+        
+        timeout: 120
+    
+    aplicacion:
+        
+        host: localhost
+        
+        url: http://localhost:3000
+        
+        titulo: 'LibreSIG'
+        
+        descripcion: 'Sistema de información Gerencial Libre'
+        
+        favicon_src: '/favicon.png'
+        
+        logo_src: ''
+        
+        resumen: '<div style="float: right"><a href="https://github.com./javierEd" target="_blank"><li class="fa fa-github fa-lg"></li> javierEd en GitHub</a></div>'
+        
+        archivos:
+            directorio: 'uploads/files'
+            papelera: 'uploads/trash/files'
+            
+        posts:
+            directorio: 'uploads/posts'
+            papelera: 'uploads/trash/posts'
+            tamanio_resumen: 512
+            por_pagina: 6
+            
+        disqus:
+            enable: false
+            
+        tallas_camisas:
+            - S
+            - M
+            - L
+            - XL
+        
+        categorias:
+            - nombre: Juvenil
+              edad_minima: 16
+              edad_maxima: 19
+            - nombre: Libre
+              edad_minima: 20
+              edad_maxima: 29
+            - nombre: Sub-Master A
+              edad_minima: 30
+              edad_maxima: 34
+            - nombre: Sub-Master B
+              edad_minima: 35
+              edad_maxima: 39
+            - nombre: Master A
+              edad_minima: 40
+              edad_maxima: 44
+            - nombre: Master B
+              edad_minima: 45
+              edad_maxima: 49
+            - nombre: Master C
+              edad_minima: 50
+              edad_maxima: 54
+            - nombre: Master D
+              edad_minima: 55
+              edad_maxima: 59
+            - nombre: Master E
+              edad_minima: 60
+              edad_maxima: 64
+            - nombre: Master F
+              edad_minima: 65
+              
+            
+        paises:
+            - nombre: Afganistán
+              codigo: af
+              idioma: en
+            - nombre: Albania
+              codigo: al
+              idioma: en
+            - nombre: Alemania
+              codigo: de
+              idioma: en
+            - nombre: Andorra
+              codigo: ad
+              idioma: en
+            - nombre: Angola
+              codigo: ao
+              idioma: pt
+            - nombre: Anguila
+              codigo: ai
+              idioma: en
+            - nombre: Antigua y Barbuda
+              codigo: ag
+              idioma: en
+            - nombre: Arabia Saudita
+              codigo: sa
+              idioma: en
+            - nombre: Argentina
+              codigo: ar
+              idioma: es
+            - nombre: Armenia
+              codigo: am
+              idioma: en
+            - nombre: Aruba
+              codigo: aw
+              idioma: en
+            - nombre: Australia
+              codigo: au
+              idioma: en
+            - nombre: Austria
+              codigo: at
+              idioma: en
+            - nombre: Azerbaiyán
+              codigo: az
+              idioma: en
+            - nombre: Bahamas
+              codigo: bs
+              idioma: en
+            - nombre: Bangladés
+              codigo: bd
+              idioma: en
+            - nombre: Barbados
+              codigo: bb
+              idioma: en
+            - nombre: Baréin
+              codigo: bh
+              idioma: en
+            - nombre: Bélgica
+              codigo: be
+              idioma: en
+            - nombre: Belice
+              codigo: bz
+              idioma: en
+            - nombre: Benín
+              codigo: bj
+              idioma: en
+            - nombre: Bermudas
+              codigo: bm
+              idioma: en
+            - nombre: Bielorrusia
+              codigo: by
+              idioma: en
+            - nombre: Birmania
+              codigo: mm
+              idioma: en
+            - nombre: Bolivia
+              codigo: bo
+              idioma: es
+            - nombre: Bosnia y Herzegovina
+              codigo: ba
+              idioma: en
+            - nombre: Botsuana
+              codigo: bw
+              idioma: en
+            - nombre: Brasil
+              codigo: br
+              idioma: pt
+            - nombre: Brunéi
+              codigo: bn
+              idioma: en
+            - nombre: Bulgaria
+              codigo: bg
+              idioma: en
+            - nombre: Burkina Faso
+              codigo: bf
+              idioma: en
+            - nombre: Burundi
+              codigo: bi
+              idioma: en
+            - nombre: Bután
+              codigo: bt
+              idioma: en
+            - nombre: Cabo Verde
+              codigo: cv
+              idioma: pt
+            - nombre: Camboya
+              codigo: kh
+              idioma: en
+            - nombre: Camerún
+              codigo: cm
+              idioma: en
+            - nombre: Canadá
+              codigo: ca
+              idioma: en
+            - nombre: Catar
+              codigo: qa
+              idioma: en
+            - nombre: Centroafricana, República
+              codigo: cf
+              idioma: en
+            - nombre: Chad
+              codigo: td
+              idioma: en
+            - nombre: Chile
+              codigo: cl
+              idioma: es
+            - nombre: China
+              codigo: cn
+              idioma: en
+            - nombre: Chipre
+              codigo: cy
+              idioma: en
+            - nombre: Cocos, Islas
+              codigo: cc
+              idioma: en
+            - nombre: Colombia
+              codigo: co
+              idioma: es
+            - nombre: Comoras
+              codigo: km
+              idioma: en
+            - nombre: Congo, República del
+              codigo: cg
+              idioma: en
+            - nombre: Congo, República Democrática del
+              codigo: cd
+              idioma: en
+            - nombre: Cook, Islas
+              codigo: ck
+              idioma: en
+            - nombre: Corea del Norte
+              codigo: kp
+              idioma: en
+            - nombre: Corea del Sur
+              codigo: kr
+              idioma: en
+            - nombre: Costa de Marfil
+              codigo: ci
+              idioma: en
+            - nombre: Costa Rica
+              codigo: cr
+              idioma: es
+            - nombre: Croacia
+              codigo: hr
+              idioma: en
+            - nombre: Cuba
+              codigo: cu
+              idioma: es
+            - nombre: Curazao
+              codigo: cw
+              idioma: en
+            - nombre: Dinamarca
+              codigo: dk
+              idioma: en
+            - nombre: Dominica
+              codigo: dm
+              idioma: en
+            - nombre: Dominicana, República
+              codigo: do
+              idioma: es
+            - nombre: Ecuador
+              codigo: ec
+              idioma: es
+            - nombre: Egipto
+              codigo: eg
+              idioma: en
+            - nombre: El Salvador
+              codigo: sv
+              idioma: es
+            - nombre: Emiratos Árabes Unidos
+              codigo: ae
+              idioma: en
+            - nombre: Eritrea
+              codigo: er
+              idioma: en
+            - nombre: Eslovaquia
+              codigo: sk
+              idioma: en
+            - nombre: Eslovenia
+              codigo: si
+              idioma: en
+            - nombre: España
+              codigo: es
+              idioma: es
+            - nombre: Estados Unidos
+              codigo: us
+              idioma: en
+            - nombre: Estonia
+              codigo: ee
+              idioma: en
+            - nombre: Etiopía
+              codigo: et
+              idioma: en
+            - nombre: Feroe, Islas
+              codigo: fo
+              idioma: en
+            - nombre: Filipinas
+              codigo: ph
+              idioma: en
+            - nombre: Finlandia
+              codigo: fi
+              idioma: en
+            - nombre: Fiyi
+              codigo: fj
+              idioma: en
+            - nombre: Francia
+              codigo: fr
+              idioma: en
+            - nombre: Gabón
+              codigo: ga
+              idioma: en
+            - nombre: Gambia
+              codigo: gm
+              idioma: en
+            - nombre: Georgia
+              codigo: ge
+              idioma: en
+            - nombre: Ghana
+              codigo: gh
+              idioma: en
+            - nombre: Gibraltar
+              codigo: gi
+              idioma: en
+            - nombre: Granada
+              codigo: gd
+              idioma: en
+            - nombre: Grecia
+              codigo: gr
+              idioma: en
+            - nombre: Groenlandia
+              codigo: gl
+              idioma: en
+            - nombre: Guam
+              codigo: gu
+              idioma: en
+            - nombre: Guatemala
+              codigo: gt
+              idioma: es
+            - nombre: Guernsey
+              codigo: gg
+              idioma: en
+            - nombre: Guinea
+              codigo: gn
+            - nombre: Guinea-Bisáu
+              codigo: gw
+              idioma: pt
+            - nombre: Guinea Ecuatorial
+              codigo: gq
+              idioma: es
+            - nombre: Guyana
+              codigo: gy
+              idioma: en
+            - nombre: Haití
+              codigo: ht
+              idioma: en
+            - nombre: Honduras
+              codigo: hn
+              idioma: es
+            - nombre: Hong Kong
+              codigo: hk
+              idioma: en
+            - nombre: Hungría
+              codigo: hu
+              idioma: en
+            - nombre: India
+              codigo: in
+              idioma: en
+            - nombre: Indonesia
+              codigo: id
+              idioma: en
+            - nombre: Irak
+              codigo: iq
+              idioma: en
+            - nombre: Irán
+              codigo: ir
+              idioma: en
+            - nombre: Irlanda
+              codigo: ie
+              idioma: en
+            - nombre: Islandia
+              codigo: is
+              idioma: en
+            - nombre: Israel
+              codigo: il
+              idioma: en
+            - nombre: Italia
+              codigo: it
+              idioma: en
+            - nombre: Jamaica
+              codigo: jm
+              idioma: en
+            - nombre: Japón
+              codigo: jp
+              idioma: en
+            - nombre: Jersey
+              codigo: je
+              idioma: en
+            - nombre: Jordania
+              codigo: jo
+              idioma: en
+            - nombre: Kazajistán
+              codigo: kz
+              idioma: en
+            - nombre: Kenia
+              codigo: ke
+              idioma: en
+            - nombre: Kirguistán
+              codigo: kg
+              idioma: en
+            - nombre: Kiribati
+              codigo: ki
+              idioma: en
+            - nombre: Kosovo
+              codigo: xk
+              idioma: en
+            - nombre: Kuwait
+              codigo: kw
+              idioma: en
+            - nombre: Laos
+              codigo: la
+              idioma: en
+            - nombre: Lesoto
+              codigo: ls
+              idioma: en
+            - nombre: Letonia
+              codigo: lv
+              idioma: en
+            - nombre: Líbano
+              codigo: lb
+              idioma: en
+            - nombre: Liberia
+              codigo: lr
+              idioma: en
+            - nombre: Libia
+              codigo: ly
+              idioma: en
+            - nombre: Liechtenstein
+              codigo: li
+              idioma: en
+            - nombre: Lituania
+              codigo: lt
+              idioma: en
+            - nombre: Luxemburgo
+              codigo: lu
+              idioma: en
+            - nombre: Macao
+              codigo: mo
+              idioma: en
+            - nombre: Macedonia
+              codigo: mk
+              idioma: en
+            - nombre: Madagascar
+              codigo: mg
+              idioma: en
+            - nombre: Malasia
+              codigo: my
+              idioma: en
+            - nombre: Malaui
+              codigo: mw
+              idioma: en
+            - nombre: Maldivas
+              codigo: mv
+              idioma: en
+            - nombre: Malí
+              codigo: ml
+              idioma: en
+            - nombre: Malta
+              codigo: mt
+              idioma: en
+            - nombre: Malvinas, Islas
+              codigo: fk
+              idioma: en
+            - nombre: Man, Isla de
+              codigo: im
+              idioma: en
+            - nombre: Marianas del Norte, Islas
+              codigo: mp
+              idioma: en
+            - nombre: Marruecos
+              codigo: ma
+              idioma: en
+            - nombre: Marshall, Islas
+              codigo: mh
+              idioma: en
+            - nombre: Mauricio
+              codigo: mu
+              idioma: en
+            - nombre: Mauritania
+              codigo: mr
+              idioma: en
+            - nombre: México
+              codigo: mx
+              idioma: es
+            - nombre: Micronesia
+              codigo: fm
+              idioma: en
+            - nombre: Moldavia
+              codigo: md
+              idioma: en
+            - nombre: Mónaco
+              codigo: mc
+              idioma: en
+            - nombre: Mongolia
+              codigo: mn
+              idioma: en
+            - nombre: Montenegro
+              codigo: me
+              idioma: en
+            - nombre: Montserrat
+              codigo: ms
+              idioma: en
+            - nombre: Mozambique
+              codigo: mz
+              idioma: en
+            - nombre: Namibia
+              codigo: na
+              idioma: en
+            - nombre: Nauru
+              codigo: nr
+              idioma: en
+            - nombre: Navidad, Isla de
+              codigo: cx
+              idioma: en
+            - nombre: Nepal
+              codigo: no
+              idioma: en
+            - nombre: Nicaragua
+              codigo: ni
+              idioma: es
+            - nombre: Níger
+              codigo: ne
+              idioma: en
+            - nombre: Nigeria
+              codigo: ng
+              idioma: en
+            - nombre: Niue
+              codigo: nu
+              idioma: en
+            - nombre: Norfolk, Isla
+              codigo: nf
+              idioma: en
+            - nombre: Noruega
+              codigo: no
+              idioma: en
+            - nombre: Nueva Caledonia 
+              codigo: nc
+              idioma: en
+            - nombre: Nueva Zelanda
+              codigo: nz
+              idioma: en
+            - nombre: Omán
+              codigo: om
+              idioma: en
+            - nombre: Países Bajos
+              codigo: nl
+              idioma: en
+            - nombre: Pakistán
+              codigo: pk
+              idioma: en
+            - nombre: Palaos
+              codigo: pw
+              idioma: en
+            - nombre: Palestina
+              codigo: ps
+              idioma: en
+            - nombre: Panamá
+              codigo: pa
+              idioma: es
+            - nombre: Papúa Nueva Guinea
+              codigo: pg
+              idioma: en
+            - nombre: Paraguay
+              codigo: pa
+              idioma: es
+            - nombre: Perú
+              codigo: pe
+              idioma: es
+            - nombre: Pitcairn, Islas
+              codigo: pn
+              idioma: en
+            - nombre: Polinesia Francesa
+              codigo: pf
+              idioma: en
+            - nombre: Polonia
+              codigo: pl
+              idioma: en
+            - nombre: Portugal
+              codigo: pt
+              idioma: pt
+            - nombre: Puerto Rico
+              codigo: pr
+              idioma: es
+            - nombre: Reino Unido
+              codigo: gb
+              idioma: en
+            - nombre: Ruanda
+              codigo: rw
+              idioma: en
+            - nombre: Rumania
+              codigo: ro
+              idioma: en
+            - nombre: Rusia
+              codigo: ru
+              idioma: en
+            - nombre: Sahara Occidental
+              codigo: eh
+              idioma: en
+            - nombre: Salomón, Islas
+              codigo: sb
+              idioma: en
+            - nombre: Samoa
+              codigo: ws
+              idioma: en
+            - nombre: Samoa Americana
+              codigo: as
+              idioma: en
+            - nombre: San Bartolomé
+              codigo: bl
+              idioma: en
+            - nombre: San Cristóbal y Nieves
+              codigo: kn
+              idioma: en
+            - nombre: San Marino
+              codigo: sm
+              idioma: en
+            - nombre: San Martín
+              codigo: mf
+              idioma: en
+            - nombre: San Pedro y Miquelón
+              codigo: pm
+              idioma: en
+            - nombre: San Vicente y las Granadinas
+              codigo: vc
+              idioma: en
+            - nombre: Santa Elena, Ascensión y Tristán de Acuña
+              codigo: sh
+              idioma: en
+            - nombre: Santa Lucía
+              codigo: lc
+              idioma: en
+            - nombre: Santo Tomé y Príncipe
+              codigo: st
+              idioma: en
+            - nombre: Senegal
+              codigo: sn
+              idioma: en
+            - nombre: Serbia
+              codigo: rs
+              idioma: en
+            - nombre: Seychelles
+              codigo: sc
+              idioma: en
+            - nombre: Sierra Leona
+              codigo: sl
+              idioma: en
+            - nombre: Singapur
+              codigo: sg
+              idioma: en
+            - nombre: Sint Maarten
+              codigo: sx
+              idioma: en
+            - nombre: Siria
+              codigo: sy
+              idioma: en
+            - nombre: Somalia
+              codigo: so
+              idioma: en
+            - nombre: Sri Lanka
+              codigo: lk
+              idioma: en
+            - nombre: Suazilandia
+              codigo: sz
+              idioma: en
+            - nombre: Sudáfrica
+              codigo: za
+              idioma: en
+            - nombre: Sudán
+              codigo: sd
+              idioma: en
+            - nombre: Sudán del Sur
+              codigo: ss
+              idioma: en
+            - nombre: Suecia
+              codigo: se
+              idioma: en
+            - nombre: Suiza
+              codigo: ch
+              idioma: en
+            - nombre: Surinam
+              codigo: sr
+              idioma: en
+            - nombre: Svalbard
+              codigo: sj
+              idioma: en
+            - nombre: Tailandia
+              codigo: th
+              idioma: en
+            - nombre: Taiwán
+              codigo: tw
+              idioma: en
+            - nombre: Tanzania
+              codigo: tz
+              idioma: en
+            - nombre: Tayikistán
+              codigo: tj
+              idioma: en
+            - nombre: Timor Oriental
+              codigo: tl
+              idioma: pt
+            - nombre: Togo
+              codigo: tg
+              idioma: en
+            - nombre: Tokelau
+              codigo: tk
+              idioma: en
+            - nombre: Tonga
+              codigo: to
+              idioma: en
+            - nombre: Trinidad y Tobago
+              codigo: tt
+              idioma: en
+            - nombre: Túnez
+              codigo: tn
+              idioma: en
+            - nombre: Turcas y Caicos, Islas
+              codigo: tc
+              idioma: en
+            - nombre: Turkmenistán
+              codigo: tm
+              idioma: en
+            - nombre: Turquía
+              codigo: tr
+              idioma: en
+            - nombre: Tuvalu
+              codigo: tv
+              idioma: en
+            - nombre: Ucrania
+              codigo: ua
+              idioma: en
+            - nombre: Uganda
+              codigo: ug
+              idioma: en
+            - nombre: Uruguay
+              codigo: uy
+              idioma: es
+            - nombre: Uzbekistán
+              codigo: uz
+              idioma: en
+            - nombre: Vanuatu
+              codigo: vu
+              idioma: en
+            - nombre: Vaticano, Ciudad del
+              codigo: va
+              idioma: en
+            - nombre: Venezuela
+              codigo: ve
+              idioma: es
+            - nombre: Vietnam
+              codigo: vn
+              idioma: en
+            - nombre: Vírgenes Británicas, Islas
+              codigo: vg
+              idioma: en
+            - nombre: Vírgenes de los Estados Unidos, Islas
+              codigo: vi
+              idioma: en
+            - nombre: Wallis y Futuna
+              codigo: wf
+              idioma: en
+            - nombre: Yemen
+              codigo: ye
+              idioma: en
+            - nombre: Yibuti
+              codigo: dj
+              idioma: en
+            - nombre: Zambia
+              codigo: zm
+              idioma: en
+            - nombre: Zimbabue
+              codigo: zw
+              idioma: en
+        
+        permisos:
+
+          - id: inscritos
+            nombre: 'Inscritos'
+            no_administrador: true
+            controladores:
+              - id: comprobantes
+                nombre: 'Comprobantes'
+                
+          - id: contenido
+            nombre: 'Contenido'
+            controladores:
+              - id: posts
+                nombre: 'Publicaciones'
+                no_administrador: true
+              - id: archivos
+                nombre: 'Archivos'
+                no_administrador: true
+              - id: menus
+                nombre: 'Menús'
+              - id: elementos
+                nombre: 'Elementos de menús'
+              - id: bloques
+                nombre: 'Bloques'
+
+          - id: sistema
+            nombre: 'Sistema'
+            controladores:
+              - id: cuentas
+                nombre: 'Cuentas de usuario'
+              - id: roles
+                nombre: 'Roles'
+          
+        username_blacklist:
+            # - 'admin'
+            - 'administrador'
+            - 'administrator'
+            - 'hostmaster'
+            - 'info'
+            - 'informacion'
+            - 'information'
+            - 'root'
+            - 'ssladmin'
+            - 'ssladministrator'
+            - 'sslwebmaster'
+            - 'sysadmin'
+            - 'webmaster'
+            - 'soporte'
+            - 'support'
+            - 'contact'
+            - 'contacto'
+            - 'locales'
+            - 'iniciarsesion'
+            - 'cerrarsesion'
+            - 'crearcuenta'
+            - 'recuperarcontrasenia'
+            - 'cambiarcontrasenia'
+            - 'administracion'
+            - 'nosotros'
+            - 'etiqueta'
+            - 'buscar'
+            - 'post'
+            - 'archivo'
+            - 'usuario'
+            - 'imagen'
+            - 'documento'
+            - 'inicio'
+            - 'micuenta'
+        
+development:
+    
+production:
+    
+test:

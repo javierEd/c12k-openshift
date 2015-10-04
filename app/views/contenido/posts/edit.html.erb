@@ -1,0 +1,24 @@
+<% content_for :titulo_pagina do %>Contenido > Publicaciones > Editar<% end %>
+<% content_for :titulo_bloque do %><%=link_to 'Contenido', contenido_index_path %> > <%=link_to 'Publicaciones', contenido_posts_path %> > Editar<% end %>
+
+<script type="text/javascript">
+  CKEDITOR.replace('post_ent_post')
+</script>
+
+<%= form_for @post, url: contenido_post_path(params[:id]), remote: true, html: { id: 'post', method: :patch, 'data-type' => :json}, :builder => FormHelper::SFormBuilder do |f| %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  <%= f.campo_texto :titulo, autofocus: true, autocomplete: "off" %>
+  <%= f.campo_ckareatexto :ent_post, :label => 'Contenido', :ckeditor => {:language => 'es', :toolbar => [['Source'],
+      ['Cut','Copy','Paste', 'PasteText', 'PasteFromWord','-','Undo','Redo'],['Find', 'Replace', '-', 'SelectAll'],['Scayt'],[ 'Link', 'Unlink', 'Anchor' ],['Image','Youtube'],
+      ['HorizontalRule'],['Smiley', 'SpecialChar'],['CodeSnippet'],[ 'About' ],
+      '/',['FontSize' ],['Bold', 'Italic','Underline','Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
+      ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],[ 'NumberedList', 'BulletedList'],[ 'TextColor', 'BGColor' ]]} %>
+  <%= f.campo_archivo :ent_archivos, :label => 'Archivos adjuntos', :ajax => true, :multiple => true %>
+  <%= f.campo_texto :ent_etiquetas, autocomplete: "off", :label => 'Etiquetas' %>
+  <%= f.campo_checkbox :publicado, :label => 'Publicar' %>
+  <%= f.campo_checkbox :pagina_simple, :label => 'Página simple' %>
+  <%= f.campo_texto :ent_alias, autocomplete: 'off', label: 'Alias' %>
+  <%= f.campo_checkbox :borrado, :label => 'Eliminar', :confirmar => '¿Esta seguro que desea eliminar definitivamente esta publicación?'  %>
+  <%= f.boton_enviar 'enviar','Enviar','plus' %>
+<% end %>
