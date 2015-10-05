@@ -34,6 +34,7 @@ class Inscripcion
   validates_presence_of :apellidos
   validates_presence_of :genero
   validates_presence_of :fecha_nac
+  
   validates_presence_of :talla_camisa
   
   validates_presence_of :email

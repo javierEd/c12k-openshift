@@ -50,9 +50,17 @@ function sform(form_id){
   this.validar_campo = function(campo, timeout){
     if(!timeout)
       timeout = 500;
-    if(this.timeout_campo[campo.id] != campo.value){
-      this.timeout_campo[campo.id] = campo.value;
-      setTimeout('_sform[\''+this.form_id+'\'].request_campo(\''+campo.id+'\',\''+campo.value+'\')',timeout);
+    if($('#'+campo.id).attr('type')=='checkbox'){
+      if($('#'+campo.id).prop('checked'))
+        valor = '1';
+      else
+        valor = '0';
+    }
+    else
+      valor = campo.value;
+    if(this.timeout_campo[campo.id] != valor){
+      this.timeout_campo[campo.id] = valor;
+      setTimeout('_sform[\''+this.form_id+'\'].request_campo(\''+campo.id+'\',\''+valor+'\')',timeout);
     }
   }
   

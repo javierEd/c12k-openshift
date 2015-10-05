@@ -1,3 +1,38 @@
-<% content_for :titulo_pagina do %>Página principal<% end %>
-¡¡Inscribete loco!!<br/>
-<%= link_to 'Inscribirse', new_inscripcion_path %>
+<% content_for :titulo_pagina do 'Página principal' end %>
+
+
+<% unless pagina.nil? %>
+  <% content_for :titulo_bloque do pagina.post.titulo end %>
+  
+  <style>
+    .post {
+        margin: 0;
+        border-bottom: none;
+    }
+  </style>
+  <div class="post">
+    <% unless pagina.post.pagina_simple %>
+      <div class="autor">
+      <% if pagina.post.fecha_publicado %>
+        hace <%= time_ago_in_words(pagina.post.fecha_publicado, include_seconds: true) %>,
+      <% end %>
+      por <%= link_to pagina.post.persona.username, perfil_path(pagina.post.persona.username), :style => 'font-weight: bold' %></div>
+    <% end %>
+    <div class="contenido"><%= pagina.post.leer_post.html_safe %></div>
+    <div class="etiquetas"><% pagina.post.etiquetas.each do |etiqueta| %>
+      <%= link_to fa_icon('tag')+' '+etiqueta.nombre, etiqueta_path(etiqueta.nombre) %>
+    <% end %></div>
+    <% unless pagina.post.pagina_simple %>
+      <div class="pie"><div style="float: left"><!-- <span style="margin-right: 15px;" title="calificación promedio">0 <%= fa_icon('trophy') %></span> -->
+        <span style="margin-right: 15px;" title="visitas">0 <%= fa_icon('users') %></span>
+        <% if AppConfig.aplicacion.disqus.enable == true %>
+          <span style="margin-right: 15px;" title="comentarios"><span class="disqus-comment-count" data-disqus-url="<%= AppConfig.aplicacion.url + post_path(post._id) %>"></span> <%= fa_icon('comments') %></span>
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% else %>
+    No se ha encontrado la publicación.
+  <% end %>
+  

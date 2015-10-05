@@ -16,16 +16,6 @@
       por <%= link_to post.persona.username, perfil_path(post.persona.username), :style => 'font-weight: bold' %></div>
     <% end %>
     <div class="contenido"><%= post.leer_post.html_safe %></div>
-    <div class="adjuntos">
-      <% unless  post.archivos_adjuntos.empty? %>
-        <div style="font-weight:bold">Archivos adjuntos:</div>
-        <% post.archivos_adjuntos.each do |archivo_adjunto| %>
-          <div class="adjunto">
-            <%= link_to archivo_adjunto.archivo.archivo_file_name.html_safe+' '+fa_icon('external-link'), archivo_path(archivo_adjunto.archivo._id), :style => 'font-weight: bold', :target => '_blank' %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
     <div class="etiquetas"><% post.etiquetas.each do |etiqueta| %>
         <%= link_to fa_icon('tag')+' '+etiqueta.nombre, etiqueta_path(etiqueta.nombre) %>
     <% end %></div>
@@ -40,43 +30,7 @@
     <% end %>
   </div>
   
-  <% unless post.pagina_simple %>
-    <% if AppConfig.aplicacion.disqus.enable == true %>
-      <div id="disqus_thread"></div>
-      <script type="text/javascript">
-          /* * * CONFIGURATION VARIABLES * * */
-          var disqus_shortname = '<%= AppConfig.aplicacion.disqus.shortname %>';
-          
-          /* * * DON'T EDIT BELOW THIS LINE * * */
-          (function() {
-              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-          })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-    <% end %>
-  <% end %>
 <% else %>
   <% content_for :titulo_pagina do 'No se ha encontrado la publicación.' end %>
   No se ha encontrado la publicación.
-<% end %>
-
-<% unless post.pagina_simple %>
-  <% @bloques_der=[] %>
-  <% @bloques_der << {:titulo => 'Publicaciones relacionadas', :contenido => capture do %>
-    <% unless relacionados.empty? %>
-      <% relacionados.each do |relacionado| %>
-        <div style="background-color: #fcfcfc;border-radius: 6px;margin-bottom: 8px;padding: 8px;">
-          <div style="font-weight: bold; font-size: 14px;text-overflow: ellipsis;overflow: hidden;margin-bottom: 6px">
-            <%= link_to relacionado.titulo, post_path(relacionado._id) %>
-          </div>
-          <div style="text-align: right">hace <%= time_ago_in_words(relacionado.fecha_publicado, include_seconds: true) %>,
-        por <%= link_to relacionado.persona.username, perfil_path(relacionado.persona.username), :style => 'font-weight: bold' %></div>
-        </div>
-      <% end %>
-    <% else %>
-      No se han encontrado publicaciones.
-    <% end %>
-  <% end } %>
 <% end %>

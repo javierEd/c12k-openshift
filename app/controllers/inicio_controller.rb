@@ -18,7 +18,7 @@ class InicioController < ApplicationController
       siguiente = pag + 1
     end
     etiquetas = Etiqueta.where(:borrado.exists => false, :bloqueado.exists => false).sort('_id' => -1).limit(10)
-    render :locals => { :posts => posts
+    render :locals => { :pagina => Alias.where(ruta: 'root').first, :posts => posts
                 .sort(:fecha_publicado => -1).skip((pag-1)*AppConfig.aplicacion.posts.por_pagina.to_i).limit(AppConfig.aplicacion.posts.por_pagina.to_i),
       :anterior => anterior, :siguiente => siguiente, :etiquetas => etiquetas }
   end

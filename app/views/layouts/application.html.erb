@@ -18,11 +18,12 @@
           <div id="banner" style="background: url('<%= banner_src %>') no-repeat scroll center; height: 150px">
             <script type="text/javascript">
               $(document).ready(function(){
-                var fecha_evento = new Date("2015-11-15T07:00:00-04:30"); 
-                $('#defaultCountdown').countdown({until: fecha_evento});
+                var fecha_evento = new Date("2015-11-15T06:30:00-04:30"); 
+                $('#defaultCountdown').countdown({until: fecha_evento, description: 'para la carrera'});
               })
             </script>
-            <div id="defaultCountdown" style="float: right; width: 320px"></div>
+            <div id="defaultCountdown" style="float: right; width: 320px; border-radius: 0 0 0 70px; box-shadow: 0px 1px 5px 3px #ddd"></div>
+            <!--<div style="float: right;font-size: 34px;color: #666666;margin-right: 15px">FALTAN</div>-->
           </div>
         <% end %>
         <div id="menuprincipal" class="navbar navbar-inverse">
