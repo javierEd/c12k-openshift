@@ -4,7 +4,7 @@ class Inscripcion
   
   require_human_on :create
   
-  attr_accessor :ent_terminos, :ent_liberacion
+  attr_accessor :edad, :categoria ,:ent_terminos, :ent_liberacion
   
   field :doc_id, type: String
   field :nombres, type: String
@@ -20,8 +20,8 @@ class Inscripcion
   field :estado, type: String
   
   field :silla_ruedas, type: Boolean
-  field :edad, type: String
-  field :categoria, type: String
+  # field :edad, type: String
+  # field :categoria, type: String
   
   field :tipo_transaccion, type: String
   field :fecha_transaccion, type: Date
@@ -46,6 +46,7 @@ class Inscripcion
   validates_presence_of :tipo_transaccion
   validates_presence_of :fecha_transaccion
   validates_presence_of :nro_transaccion
+  validates_uniqueness_of :nro_transaccion
   
   validates_acceptance_of :ent_terminos
   validates_acceptance_of :ent_liberacion

@@ -18,6 +18,8 @@
 //= require leaflet
 //= require ckeditor/init
 //= require ckeditor/plugins/codesnippet/lib/highlight/highlight.pack
+//= require jquery.countdown
+//= require jquery.countdown-es
 //= require_tree .
 
 function startSpinner(){

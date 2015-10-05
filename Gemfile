@@ -41,6 +41,7 @@ gem "jquery-ui-rails", "~> 5.0.3"
 gem 'coffee-rails', '~> 4.0.1'
 gem 'turbolinks', '~> 2.5.2'
 gem 'ckeditor', '~> 4.1.2'
+gem 'jquery-countdown-rails', '~> 2.0.2'
 
 # CSS
 gem 'sass-rails', '~> 5.0'

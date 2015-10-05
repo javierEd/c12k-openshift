@@ -15,7 +15,15 @@
     <div id="wrapper">
       <div id="cabezal">
         <% if banner_src %>
-          <div id="banner" style="background: url('<%= banner_src %>') no-repeat scroll center; height: 150px"></div>
+          <div id="banner" style="background: url('<%= banner_src %>') no-repeat scroll center; height: 150px">
+            <script type="text/javascript">
+              $(document).ready(function(){
+                var fecha_evento = new Date("2015-11-15T07:00:00-04:30"); 
+                $('#defaultCountdown').countdown({until: fecha_evento});
+              })
+            </script>
+            <div id="defaultCountdown" style="float: right; width: 320px"></div>
+          </div>
         <% end %>
         <div id="menuprincipal" class="navbar navbar-inverse">
           <div class="container">
@@ -56,7 +64,7 @@
                     </ul>
                   </li>
                 <% else %>
-                  <li><%= link_to fa_icon("sign-in lg", style: 'font-size: 1.8em'), new_cuenta_session_path, :title => 'iniciar sesión' %></li>
+                  <!-- <li><%#= link_to fa_icon("sign-in lg", style: 'font-size: 1.8em'), new_cuenta_session_path, :title => 'iniciar sesión' %></li> -->
                 <% end %>
               </ul>
             </div>
