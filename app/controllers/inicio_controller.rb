@@ -126,6 +126,31 @@ class InicioController < ApplicationController
         end
         relacionados = Post.where(:publicado => true, :borrado.exists => false, :bloqueado.exists => false, :_id.ne => a.post._id, :etiqueta_ids.in => arr_id_etiquetas )
         render 'post', :locals => { :post => a.post, :relacionados => relacionados }
+      elsif a.archivo
+        if params[:descargar]
+          # response.headers['Content-Type'] = archivo.tipo
+          # response.headers['Content-Disposition'] = 'attachment; filename="'+archivo.nombre+'"'
+          # response.headers['Content-Length'] = archivo.tamanio
+          # render :text => archivo.abrir
+          send_file(AppConfig.aplicacion.archivos.directorio+"/"+a.archivo._id, filename: a.archivo.nombre, type: a.archivo.tipo, disposition: 'attachment')
+        elsif params[:ver] && archivo.tipo == 'application/pdf'
+          # response.headers['Content-Type'] = archivo.tipo
+          # response.headers['Content-Disposition'] = 'inline; filename="'+archivo.nombre+'"'
+          # response.headers['Content-Length'] = archivo.tamanio
+          # render :text => archivo.abrir
+          send_file(AppConfig.aplicacion.archivos.directorio+"/"+a.archivo._id, filename: a.archivo.nombre, type: a.archivo.tipo, disposition: 'inline')
+        else
+          tipos_aceptados = request.env['HTTP_ACCEPT'].split(",")
+          if tipos_aceptados.include?("text/html") || tipos_aceptados.include?("application/xhtml+xml")
+            render 'archivo', :locals => { archivo_url: '/archivo/'+a.archivo._id, archivo: a.archivo }
+          else
+            # response.headers['Content-Type'] = archivo.tipo
+            # response.headers['Content-Disposition'] = 'inline; filename="'+archivo.nombre+'"'
+            # response.headers['Content-Length'] = archivo.tamanio
+            # render :text => archivo.abrir
+            send_file(AppConfig.aplicacion.archivos.directorio+"/"+a.archivo._id, filename: a.archivo.nombre, type: a.archivo.tipo, disposition: 'inline')
+          end
+        end
       end
     end
   end

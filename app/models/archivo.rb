@@ -16,7 +16,7 @@ class Archivo
   field :publicado, type: Boolean
   field :fecha_publicado, type: DateTime
   
-  has_one :alias
+  has_one :alias, autosave: true
   
   field :borrado, type: Boolean
   field :aprobado, type: Boolean
