@@ -2,9 +2,9 @@
 <% content_for :titulo_bloque do %>Inscritos<% end %>
 
 <% unless inscritos.empty? %>
-  <%= rejilla ['C.I. o Pasaporte','Nombres','Apellidos','...'] do |r| %>
+  <%= rejilla ['Fecha de inscripción','C.I. o Pasaporte','Nombres','Apellidos','...'] do |r| %>
     <% inscritos.each do |inscrito| %>
-      <%= r.fila [inscrito.doc_id.upcase, inscrito.nombres.titleize, inscrito.apellidos.titleize, ( inscrito.comprobante.nil? ? link_to('Procesar', new_inscrito_comprobante_path(inscrito._id)): inscrito.comprobante.nro.to_s.rjust(4,"0") ) ] %>
+      <%= r.fila [inscrito.creado.fecha.strftime('%d/%m/%Y %I:%M:%S %p'), inscrito.doc_id.upcase, inscrito.nombres.titleize, inscrito.apellidos.titleize, ( inscrito.comprobante.nil? ? link_to('Procesar', new_inscrito_comprobante_path(inscrito._id)): inscrito.comprobante.nro.to_s.rjust(4,"0") ) ] %>
     <% end %>
   <% end %>
 <% else %>
