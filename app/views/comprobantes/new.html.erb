@@ -48,7 +48,6 @@
   <%= f.iniciar_sformjs %>
   <%= f.resumen_errores %>
   <%= f.campo_texto :ent_nro, label: 'Nº de corredor que se podría asignar', readonly: true %>
-  <%= f.campo_checkbox :elite, label: '¿Es corredor elite?', 'validar-con-ruta' => mostrar_numero_path %>
   <%= f.campo_checkbox :aprobar, label: 'He verificado todos sus datos' %>
   <%= f.boton_enviar 'enviar','Enviar','paper-plane' %>
 <% end %>

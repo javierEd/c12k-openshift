@@ -37,22 +37,22 @@ class ComprobantesController < ApplicationController
     end
   end
   
-  def mostrar_numero
-    if params[:elite] == '1'
-      nro = Comprobante.where(elite: true).count + 1
-      if nro > 50
-        nro = Comprobante.where(elite: false).count + 51
-      end
-    else
-      nro = Comprobante.where(elite: false).count + 51
-    end
-    arr = {
-      _campos: {
-        ent_nro: { _set: { value: nro.to_s.rjust(4,"0") }  } 
-      }
-    }
-    render :json => arr
-  end
+#   def mostrar_numero
+#     if params[:elite] == '1'
+#       nro = Comprobante.where(elite: true).count + 1
+#       if nro > 50
+#         nro = Comprobante.where(elite: false).count + 51
+#       end
+#     else
+#       nro = Comprobante.where(elite: false).count + 51
+#     end
+#     arr = {
+#       _campos: {
+#         ent_nro: { _set: { value: nro.to_s.rjust(4,"0") }  } 
+#       }
+#     }
+#     render :json => arr
+#   end
   
   def show
     send_data comprobante(Inscripcion.find(params[:inscrito_id]).comprobante), filename: 'comprobante.pdf', type: 'application/pdf'
