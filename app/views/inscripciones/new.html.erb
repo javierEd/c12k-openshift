@@ -6,12 +6,14 @@
   <%= f.resumen_errores %>
   
   <%= seccion 'Datos personales' do %>
-    <%= f.campo_texto :doc_id, autofocus: true, autocomplete: "off", label: 'Cedula o pasaporte', placeholder: 'V-00000000' %>
+    <%= f.campo_texto :doc_id, autofocus: true, autocomplete: "off", label: 'Cedula de identidad o pasaporte', placeholder: 'V00000000' %>
     <%= f.campo_texto :nombres, autocomplete: "off", placeholder: 'Juan' %>
     <%= f.campo_texto :apellidos, autocomplete: "off", placeholder: 'Perez' %>
     <%= f.campo_selec :genero, :opciones => [['Seleccione',''],['Hombre',1],['Mujer',2]], label: 'Sexo' %>
-    <%= f.campo_fecha :fecha_nac, :autocomplete => "off", :yearRange => "-100:+0", :desde => Date.new(1915,01,01), :hasta => Date.new(1999,12,31), label: 'Fecha de nacimiento', 'validar-con-ruta' => mostrar_categoria_path, params: 'fecha_nac silla_ruedas' %>
+    <%= f.campo_fecha :fecha_nac, :autocomplete => "off", :yearRange => "-100:+0", :desde => Date.new(1915,01,01), :hasta => Date.new(1999,12,31), label: 'Fecha de nacimiento', 'validar-con-ruta' => mostrar_categoria_path, params: 'fecha_nac discapacidad silla_ruedas' %>
     <%= f.campo_selec :talla_camisa, opciones: select_tallas_camisas, label: 'Talla de camisa' %>
+    <%= f.campo_checkbox :discapacidad, label: '¿Posee alguna discapacidad?', 'validar-con-ruta' => mostrar_categoria_path, params: 'fecha_nac discapacidad silla_ruedas' %>
+    <%= f.campo_checkbox :silla_ruedas, label: '¿Posee silla de ruedas?', disabled: true , 'validar-con-ruta' => mostrar_categoria_path, params: 'fecha_nac discapacidad silla_ruedas' %>
   <% end %>
 
   <%= seccion 'Datos de ubicación' do %>
@@ -23,13 +25,13 @@
   <% end %>
   
   <%= seccion 'Datos de la categoria' do %>
-    <%= f.campo_checkbox :silla_ruedas, label: '¿Posee actualmente silla de ruedas?', 'validar-con-ruta' => mostrar_categoria_path, params: 'fecha_nac silla_ruedas' %>
     <%= f.campo_texto :edad, readonly: true %>
     <%= f.campo_texto :categoria, readonly: true %>
   <% end %>
   
     <%= seccion 'Datos del pago' do %>
-    <%= f.campo_selec :tipo_transaccion, opciones: [['Seleccione',''],['Deposito','deposito'],['Transferencia','transferencia']], label: 'Tipo de transacción' %>
+    <%= f.campo_selec :tipo_transaccion, opciones: [['Seleccione',''],['Deposito','deposito'],['Transferencia','transferencia']], label: 'Tipo de transacción', 'validar-con-ruta' => tipo_transaccion_path %>
+    <%= f.campo_texto :desde_banco, autocomplete: "off", readonly: true, label: 'Banco de procedencia <span style="font-weight: normal">(solo para transferencias)</span>'.html_safe %>
     <%= f.campo_fecha :fecha_transaccion, :autocomplete => "off", :yearRange => "-100:+0", :desde => Date.new(2015,10,3), :hasta => Date.today, label: 'Fecha de la transacción'  %>
     <%= f.campo_texto :nro_transaccion, autocomplete: "off", label: 'Nº de Deposito o Transferencia' %>
     <%= f.campo_areatexto :adicional_transaccion, label: 'Información adicional de la transacción' %>
@@ -41,7 +43,7 @@
   <% end %>
   
   <%= seccion 'Información legal' do %>
-    <%= link_to 'Terminos y Condiciones', '#', target: '_blank' %> | <%= link_to 'Liberación de Responsabilidad', '#', target: '_blank' %>
+    <%= link_to 'Terminos y Condiciones', '/reglamento', target: '_blank' %> | <%= link_to 'Liberación de Responsabilidad', '/liberacion', target: '_blank' %>
     <%= f.campo_checkbox :ent_terminos, :label => 'He Leido y Aceptado los Terminos y Condiciones' %>
     <%= f.campo_checkbox :ent_liberacion, :label => 'He Leido y Aceptado la Liberación de Responsabilidad' %>
   <% end %>

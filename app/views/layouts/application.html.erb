@@ -51,6 +51,9 @@
                   <li class="dropdown">
                     <%= link_to current_cuenta.username.html_safe + ' <span class="caret"></span>'.html_safe, '#', 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'role' => 'button', 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'  %>
                     <ul class="dropdown-menu">
+                      <% if tiene_permiso?('inscritos') %>
+                        <li><%= link_to 'Inscritos '.html_safe+fa_icon("users fw"), inscritos_path %></li>
+                      <% end %>
                       <% if tiene_permiso?('contenido') %>
                         <li><%= link_to 'Contenido '.html_safe+fa_icon("file-text-o fw"), contenido_index_path %></li>
                       <% end %>

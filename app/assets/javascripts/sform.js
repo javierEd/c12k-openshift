@@ -67,6 +67,8 @@ function sform(form_id){
   this.request_campo=function(campo_id,campo_valor){
       
     if(this.timeout_campo[campo_id] === campo_valor){
+      
+          delete this.timeout_campo[campo_id];
           
           $('div#campo_'+campo_id).addClass('cargando');
           $('div#campo_'+campo_id).children('.msg_error').html('cargando...');
@@ -130,6 +132,10 @@ function sform(form_id){
   
   this.alterar_campo=function(id,cambios){
       if($('#'+id)){
+          
+          if(this.timeout_campo[id])
+            delete this.timeout_campo[id];
+          
           if(cambios['_set']){
               for(var i in cambios['_set']){
                   if(i=='error'){

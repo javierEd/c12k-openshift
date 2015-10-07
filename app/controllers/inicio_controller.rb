@@ -91,24 +91,27 @@ class InicioController < ApplicationController
   def archivo
     if archivo = Archivo.where(:_id => params[:id], :borrado.exists => false, :bloqueado.exists => false).first
       if params[:descargar]
-        response.headers['Content-Type'] = archivo.tipo
-        response.headers['Content-Disposition'] = 'attachment; filename="'+archivo.nombre+'"'
-        response.headers['Content-Length'] = archivo.tamanio
-        render :text => archivo.abrir
+        # response.headers['Content-Type'] = archivo.tipo
+        # response.headers['Content-Disposition'] = 'attachment; filename="'+archivo.nombre+'"'
+        # response.headers['Content-Length'] = archivo.tamanio
+        # render :text => archivo.abrir
+        send_file(AppConfig.aplicacion.archivos.directorio+"/"+archivo._id, filename: archivo.nombre, type: archivo.tipo, disposition: 'attachment')
       elsif params[:ver] && archivo.tipo == 'application/pdf'
-        response.headers['Content-Type'] = archivo.tipo
-        response.headers['Content-Disposition'] = 'inline; filename="'+archivo.nombre+'"'
-        response.headers['Content-Length'] = archivo.tamanio
-        render :text => archivo.abrir
+        # response.headers['Content-Type'] = archivo.tipo
+        # response.headers['Content-Disposition'] = 'inline; filename="'+archivo.nombre+'"'
+        # response.headers['Content-Length'] = archivo.tamanio
+        # render :text => archivo.abrir
+        send_file(AppConfig.aplicacion.archivos.directorio+"/"+archivo._id, filename: archivo.nombre, type: archivo.tipo, disposition: 'inline')
       else
         tipos_aceptados = request.env['HTTP_ACCEPT'].split(",")
         if tipos_aceptados.include?("text/html") || tipos_aceptados.include?("application/xhtml+xml")
           render :locals => { archivo_url: '/archivo/'+archivo._id, archivo: archivo }
         else
-          response.headers['Content-Type'] = archivo.tipo
-          response.headers['Content-Disposition'] = 'inline; filename="'+archivo.nombre+'"'
-          response.headers['Content-Length'] = archivo.tamanio
-          render :text => archivo.abrir
+          # response.headers['Content-Type'] = archivo.tipo
+          # response.headers['Content-Disposition'] = 'inline; filename="'+archivo.nombre+'"'
+          # response.headers['Content-Length'] = archivo.tamanio
+          # render :text => archivo.abrir
+          send_file(AppConfig.aplicacion.archivos.directorio+"/"+archivo._id, filename: archivo.nombre, type: archivo.tipo, disposition: 'inline')
         end
       end
     end 

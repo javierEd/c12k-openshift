@@ -53,7 +53,7 @@ pordefecto:
         
         categorias:
             - nombre: Juvenil
-              edad_minima: 16
+              edad_minima: 0
               edad_maxima: 19
             - nombre: Libre
               edad_minima: 20
@@ -81,6 +81,7 @@ pordefecto:
               edad_maxima: 64
             - nombre: Master F
               edad_minima: 65
+              edad_maxima: 200
               
             
         paises:

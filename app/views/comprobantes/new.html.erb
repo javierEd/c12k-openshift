@@ -1,0 +1,55 @@
+<% content_for :titulo_pagina do %>Inscritos > Procesar<% end %>
+<% content_for :titulo_bloque do %><%=link_to 'Inscritos', inscritos_path %> > Procesar<% end %>
+
+<%= seccion 'Datos personales' do %>
+  Cédula de identidad o Pasaporte: <%=@inscripcion.doc_id.upcase %><br/>
+  Nombres: <%=@inscripcion.nombres.titleize %><br/>
+  Apellidos: <%=@inscripcion.apellidos.titleize %><br/>
+  Sexo: <%=@inscripcion.genero == 1 ? 'Masculino' : 'Femenino' %><br/>
+  Fecha de nacimiento: <%=@inscripcion.fecha_nac.strftime('%d/%m/%Y') %><br/>
+  Talla de camisa: <%=@inscripcion.talla_camisa %><br/>
+<% end %>
+
+<%= seccion 'Datos de ubicación' do %>
+  Correo electrónico: <%=@inscripcion.email.downcase %><br/>
+  Teléfono movil: <%=@inscripcion.tlf_movil %><br/>
+  Teléfono fijo: <%=@inscripcion.tlf_fijo %><br/>
+  País: <%=AppConfig.aplicacion.paises.select{|k| k['codigo']==@inscripcion.pais}[0]['nombre'] %><br/>
+  Estado: <%=@inscripcion.estado.titleize %><br/>
+<% end %>
+
+<%= seccion 'Datos de la categoria' do %>
+  ¿Posee alguna discapacidad?: <%= @inscripcion.discapacidad ? 'Si' : 'No' %><br/>
+  ¿Posee silla de ruedas?: <%= @inscripcion.silla_ruedas ? 'Si' : 'No' %><br/>
+  <% edad = 2015 - @inscripcion.fecha_nac.year %>
+  <% edad_real = edad %>
+  <% edad_real = edad - 1 if @inscripcion.fecha_nac.mon > DateTime.now.mon || (@inscripcion.fecha_nac.mon == DateTime.now.mon && @inscripcion.fecha_nac.mday > DateTime.now.mday) %>
+  Edad: <%= edad_real %><br/>
+  <% if @inscripcion.discapacidad && @inscripcion.silla_ruedas %>
+      <% categoria = 'Con silla de ruedas' %>
+    <% elsif @inscripcion.silla_ruedas %>
+      <% categoria = 'Sin silla de ruedas' %>
+    <% else %>
+      <% categoria = AppConfig.aplicacion.categorias.select{ |k| k['edad_minima'].to_i <= edad && k['edad_maxima'].to_i >= edad }[0]['nombre'] %>
+    <% end %>
+  Categoria: <%= AppConfig.aplicacion.categorias.select{ |k| k['edad_minima'].to_i <= edad && k['edad_maxima'].to_i >= edad }[0]['nombre'] %><br/>
+<% end %>
+
+<%= seccion 'Datos del pago' do %>
+  Tipo de transacción: <%=@inscripcion.tipo_transaccion.capitalize%><br/>
+  <%= @inscripcion.tipo_transaccion == 'transferencia' ? 'Banco de procedencia: '+@inscripcion.desde_banco+'<br/>'.html_safe : '' %>
+  Fecha de la transacción: <%=@inscripcion.fecha_transaccion.strftime('%d/%m/%Y')%><br/>
+  Nº de Deposito o Transferencia: <%=@inscripcion.nro_transaccion%><br/>
+  Información adicional de la transacción: <%=@inscripcion.adicional_transaccion%><br/>
+<% end %>
+
+<%= seccion 'Procesar inscripción' do %>
+<%= form_for @comprobante, url:  inscrito_comprobantes_path(@inscripcion._id), remote: true, html: { id: 'comprobante', 'data-type' => :json}, :builder => FormHelper::SFormBuilder do |f|  %>
+  <%= f.iniciar_sformjs %>
+  <%= f.resumen_errores %>
+  <%= f.campo_texto :ent_nro, label: 'Nº de corredor que se podría asignar', readonly: true %>
+  <%= f.campo_checkbox :elite, label: '¿Es corredor elite?', 'validar-con-ruta' => mostrar_numero_path %>
+  <%= f.campo_checkbox :aprobar, label: 'He verificado todos sus datos' %>
+  <%= f.boton_enviar 'enviar','Enviar','paper-plane' %>
+<% end %>
+<% end %>

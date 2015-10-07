@@ -13,15 +13,22 @@ Rails.application.routes.draw do
   resources :inscripciones, only: [:new, :create]
   
   get 'mostrar_categoria', to: 'inscripciones#mostrar_categoria', as: 'mostrar_categoria'
-  get 'mostrar_categoria/:nil/:silla_ruedas', to: 'inscripciones#mostrar_categoria'
-  get 'mostrar_categoria/:nil/:nil1/:silla_ruedas', to: 'inscripciones#mostrar_categoria'
-  get 'mostrar_categoria/:dia/:mes/:anio/:silla_ruedas', to: 'inscripciones#mostrar_categoria'
+  get 'mostrar_categoria/:nil/:discapacidad/:silla_ruedas', to: 'inscripciones#mostrar_categoria'
+  get 'mostrar_categoria/:nil/:nil1/:discapacidad/:silla_ruedas', to: 'inscripciones#mostrar_categoria'
+  get 'mostrar_categoria/:dia/:mes/:anio/:discapacidad/:silla_ruedas', to: 'inscripciones#mostrar_categoria'
   
-  resources :inscritos, :contenido, :sistema, only: [:index]
+  get 'tipo_transaccion', to: 'inscripciones#mostrar_categoria', as: 'tipo_transaccion'
+  get 'tipo_transaccion/:tipo', to: 'inscripciones#tipo_transaccion'
   
-  namespace :inscritos do
-    resources :comprobantes, only: [:index,:new,:create]
+  resources :contenido, :sistema, only: [:index]
+  
+  resources :inscritos, only: [:index] do
+    resources :comprobantes, only: [:new, :create, :show]
   end
+  
+  get 'mostrar_numero', to: 'comprobantes#mostrar_numero', as: 'mostrar_numero'
+  get 'mostrar_numero/:elite', to: 'comprobantes#mostrar_numero'
+  
   namespace :contenido do
     resources :posts, :archivos, :bloques, only: [:index, :new, :create, :edit, :update]
     resources :menus, only: [:index] do
