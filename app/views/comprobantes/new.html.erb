@@ -27,12 +27,12 @@
   Edad: <%= edad_real %><br/>
   <% if @inscripcion.discapacidad && @inscripcion.silla_ruedas %>
       <% categoria = 'Con silla de ruedas' %>
-    <% elsif @inscripcion.silla_ruedas %>
+  <% elsif @inscripcion.discapacidad %>
       <% categoria = 'Sin silla de ruedas' %>
-    <% else %>
+  <% else %>
       <% categoria = AppConfig.aplicacion.categorias.select{ |k| k['edad_minima'].to_i <= edad && k['edad_maxima'].to_i >= edad }[0]['nombre'] %>
-    <% end %>
-  Categoria: <%= AppConfig.aplicacion.categorias.select{ |k| k['edad_minima'].to_i <= edad && k['edad_maxima'].to_i >= edad }[0]['nombre'] %><br/>
+  <% end %>
+  Categoria: <%= categoria %><br/>
 <% end %>
 
 <%= seccion 'Datos del pago' do %>

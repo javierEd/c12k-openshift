@@ -22,7 +22,7 @@ class ComprobantesController < ApplicationController
                                  Recuerde descargar e imprimir el comprobante que se encuentra adjunto a este mensaje.".html_safe,
                                  :adjuntos => [{:nombre => 'comprobante.pdf', :contenido => comprobante(@comprobante)}] ).deliver_later
       respond_with @comprobante do |format|
-        format.json {render :json => { _exito: true, _mensaje: 'Datos enviados exitosamente.', _ubicacion: root_path } }
+        format.json {render :json => { _exito: true, _mensaje: 'Datos enviados exitosamente.', _ubicacion: inscritos_path } }
       end
     else
       campos={}
@@ -101,7 +101,7 @@ class ComprobantesController < ApplicationController
     
     if comprobante.inscripcion.discapacidad && comprobante.inscripcion.silla_ruedas
       categoria = 'Con silla de ruedas'
-    elsif comprobante.inscripcion.silla_ruedas
+    elsif comprobante.inscripcion.discapacidad
       categoria = 'Sin silla de ruedas'
     else
       categoria = AppConfig.aplicacion.categorias.select{ |k| k['edad_minima'].to_i <= (2015 - comprobante.inscripcion.fecha_nac.year) && k['edad_maxima'].to_i >= (2015 - comprobante.inscripcion.fecha_nac.year) }[0]['nombre']
@@ -120,6 +120,10 @@ class ComprobantesController < ApplicationController
     end
     pdf.text "Fecha de la transacción: <b>#{comprobante.inscripcion.fecha_transaccion.strftime('%d/%m/%Y')}</b>", :inline_format => true
     pdf.text "Nº de Deposito o Transferencia: <b>#{comprobante.inscripcion.nro_transaccion}</b>", :inline_format => true
+    
+    #pdf.image "public/sponsors.jpg", :at => [-10, 200], :scale => 0.55
+    
+#     pdf.pad(20) { pdf.text "Text padded both before and after." }
     
     return pdf.render
   end
