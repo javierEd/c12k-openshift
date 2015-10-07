@@ -39,7 +39,7 @@ class Cuenta
   validates_presence_of :ent_apellidos, unless: 'administrador || solo_password'
   validates_presence_of :ent_email, unless: 'administrador || solo_password'
   
-  validates_uniqueness_of :administrador        # Solo puede haber un administrador
+  # validates_uniqueness_of :administrador        # Solo puede haber un administrador
   
   before_create :insertar_datos, unless: 'administrador'
   

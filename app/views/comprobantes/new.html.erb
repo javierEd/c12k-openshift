@@ -37,7 +37,7 @@
 
 <%= seccion 'Datos del pago' do %>
   Tipo de transacción: <%=@inscripcion.tipo_transaccion.capitalize%><br/>
-  <%= @inscripcion.tipo_transaccion == 'transferencia' ? 'Banco de procedencia: '+@inscripcion.desde_banco+'<br/>'.html_safe : '' %>
+  <%= @inscripcion.tipo_transaccion == 'transferencia' ? 'Banco de procedencia: '.html_safe+@inscripcion.desde_banco+'<br/>'.html_safe : '' %>
   Fecha de la transacción: <%=@inscripcion.fecha_transaccion.strftime('%d/%m/%Y')%><br/>
   Nº de Deposito o Transferencia: <%=@inscripcion.nro_transaccion%><br/>
   Información adicional de la transacción: <%=@inscripcion.adicional_transaccion%><br/>
