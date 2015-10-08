@@ -65,7 +65,7 @@ gem 'uglifier', '~> 2.5.3'
 
 # Captcha
 gem "recaptcha", :require => "recaptcha/rails"
-# gem 'humanizer', '~> 2.6.2'
+gem 'humanizer', '~> 2.6.2'
 
 # Documentos y reportes
 gem 'truncate_html', '~> 0.9.3'
