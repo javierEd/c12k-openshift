@@ -1,8 +1,8 @@
 class Inscripcion
   include Mongoid::Base
-  include Humanizer
+  # include Humanizer
   
-  require_human_on :create
+  # require_human_on :create
   
   attr_accessor :edad, :categoria ,:ent_terminos, :ent_liberacion
   
@@ -34,8 +34,12 @@ class Inscripcion
   validates_presence_of :apellidos
   validates_presence_of :genero
   validates_presence_of :fecha_nac
+  # validates_format_of :fecha_nac, :with => /\A[0-9]{2}\/[0-9]{2}\/[0-9]{4}\z/, allow_blank: true
   
   validates_presence_of :talla_camisa
+  
+  validates_presence_of :discapacidad, :if => 'silla_ruedas'
+  
   
   validates_presence_of :email
   validates_uniqueness_of :email, :case_sensitive => false
@@ -50,6 +54,7 @@ class Inscripcion
   validates_presence_of :tipo_transaccion
   validates_presence_of :desde_banco, if: 'tipo_transaccion == "transferencia"'
   validates_presence_of :fecha_transaccion
+  # validates_format_of :fecha_transaccion, :with => /\A[0-9]{2}\/[0-9]{2}\/[0-9]{4}\z/, allow_blank: true
   validates_presence_of :nro_transaccion
   validates_format_of :nro_transaccion, :with => /\A[0-9]{1,}\z/, allow_blank: true, message: 'Solo se permiten números'
   validates_uniqueness_of :nro_transaccion
@@ -62,7 +67,7 @@ class Inscripcion
   has_one :comprobante
   
   def validar_edad
-    if Date.parse(fecha_nac.to_s).year > 1999
+    if fecha_nac && Date.parse(fecha_nac.to_s).year > 1999
       errors.add(:fecha_nac, "Debes tener 16 años o al menos cumplirlos en lo que queda de año")
     end
   end

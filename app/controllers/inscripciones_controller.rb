@@ -8,7 +8,7 @@ class InscripcionesController < ApplicationController
     
   def create
     @inscripcion = Inscripcion.new(params[:inscripcion].merge({:tmp_vars => get_tmp_vars}))
-    if @inscripcion.save
+    if @inscripcion.save # verify_recaptcha(:model => @inscripcion, :message => "Respuesta invalida") && 
       GenericMailer.generic_email(@inscripcion.email, AppConfig.aplicacion.titulo+' | Datos enviados exitosamente',
                                   '¡Bienvenid'.html_safe+(@inscripcion.genero == 1 ? 'o'.html_safe : 'a'.html_safe)+' '.html_safe+@inscripcion.nombres.titleize+' '.html_safe+@inscripcion.apellidos.titleize+"!<br/>
                                  <br/>
@@ -39,15 +39,10 @@ class InscripcionesController < ApplicationController
         format.json {render :json => { _exito: true, _mensaje: 'Datos enviados exitosamente.', _ubicacion: root_path } }
       end
     else
-      @inscripcion.change_humanizer_question(params[:inscripcion][:humanizer_question_id])
-      campos={ :humanizer_answer => { _set: {  } } }
+      campos={}
       @inscripcion.errors.each do |error|
         campos[error]={_set: {error: @inscripcion.errors[error]} }
       end
-      @inscripcion.change_humanizer_question(params[:inscripcion][:humanizer_question_id])
-      campos[:humanizer_answer][:_set][:label] = @inscripcion.humanizer_question
-      campos[:humanizer_answer][:_set][:value] = ''
-      campos[:humanizer_question_id]= { :_set => {:value => @inscripcion.humanizer_question_id } }
       respond_with @inscripcion do |format|
         format.json {render :json => { _exito: false, _canterrores: @inscripcion.errors.count, _campos: campos
           }

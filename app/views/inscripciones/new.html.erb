@@ -37,10 +37,12 @@
     <%= f.campo_areatexto :adicional_transaccion, label: 'Información adicional de la transacción' %>
   <% end %>
   
-  <%= seccion 'Responda la siguiente pregunta' do %>
-    <%= f.campo_texto :humanizer_answer, :label => @inscripcion.humanizer_question, :autocomplete => "off" %>
-    <%= f.hidden_field :humanizer_question_id %>
-  <% end %>
+  <%#= seccion 'Pregunta de seguridad' do %>
+  <%#  <div id="campo_inscripcion_base" class="form-group"> %>
+      <%#= recaptcha_tags %>
+  <%#    <div class="msg_error"></div> %>
+  <%#  </div> %>
+  <%# end %>
   
   <%= seccion 'Información legal' do %>
     <%= link_to 'Terminos y Condiciones', '/reglamento', target: '_blank' %> | <%= link_to 'Liberación de Responsabilidad', '/liberacion', target: '_blank' %>
