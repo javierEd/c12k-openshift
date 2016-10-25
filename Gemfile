@@ -1,19 +1,19 @@
 source 'https://rubygems.org'
 
-gem 'rake', '10.4.2'
-gem 'rails', '4.2.3'
+# gem 'rake', '~> 10.4.2'
+gem 'rails', '4.2.7.1'
 gem 'configurate', '0.3.1'
-gem 'actionpack', '4.2.3'
+# gem 'actionpack', '4.2.3'
 gem "activeresource", "4.0.0"
-gem 'request_store', '1.1.0'
+# gem 'request_store', '1.3.1'
 
 # Appserver
 gem 'unicorn', '4.9.0'
 gem 'unicorn-rails', '2.2.0'
 
 # Bases de datos
-gem 'mongoid', '4.0.2'
-gem 'mongoid_rails_migrations', '1.1.0'
+gem 'mongoid', '5.1.4'
+# gem 'mongoid_rails_migrations', '1.1.0'
 # gem 'sqlite3'
 # gem 'mysql2'
 # gem 'pg'
@@ -23,11 +23,11 @@ gem 'seed_dump'
 # Subir archivos
 gem 'mime-types', '2.6.1'
 gem 'mimemagic', '0.3.0'
-gem 'paperclip', '4.2.4'
-gem 'mongoid-paperclip', '0.0.10', :require => 'mongoid_paperclip'
+# gem 'paperclip', '4.2.4'
+gem 'mongoid-paperclip', '0.0.11', :require => 'mongoid_paperclip'
 
 # Localización
-gem 'i18n', '~> 0.7.0'
+# gem 'i18n', '~> 0.7.0'
 gem 'http_accept_language', '~> 2.0.5'
 gem 'i18n-inflector-rails', '~> 1.0.7'
 gem 'rails-i18n', '~> 4.0.4'
@@ -40,7 +40,7 @@ gem 'jquery-rails', "~> 4.0.3"
 gem "jquery-ui-rails", "~> 5.0.3"
 gem 'coffee-rails', '~> 4.0.1'
 gem 'turbolinks', '~> 2.5.2'
-gem 'ckeditor', '~> 4.1.2'
+# gem 'ckeditor', '~> 4.1.2'
 gem 'jquery-countdown-rails', '~> 2.0.2'
 
 # CSS
@@ -56,7 +56,7 @@ gem 'bcrypt', '~> 3.1.10'
 gem 'responders', '~> 2.1.0'
 gem 'warden', '~> 1.2.3' #, :github => "hassox/warden", :branch => 'master'
 gem 'devise', '3.5.2'
-gem 'devise-i18n', '~> 0.12.1'
+# gem 'devise-i18n', '~> 0.12.1'
 
 gem "protected_attributes", "~> 1.0.5"
 
@@ -64,19 +64,19 @@ gem "protected_attributes", "~> 1.0.5"
 gem 'uglifier', '~> 2.5.3'
 
 # Captcha
-gem "recaptcha", :require => "recaptcha/rails"
-gem 'humanizer', '~> 2.6.2'
+# gem "recaptcha", :require => "recaptcha/rails"
+# gem 'humanizer', '~> 2.6.2'
 
 # Documentos y reportes
-gem 'truncate_html', '~> 0.9.3'
-gem 'prawn', '~> 1.3.0'
-gem 'spreadsheet', '~> 1.0.3'
+# gem 'truncate_html', '~> 0.9.3'
+gem 'prawn', '~> 2.1.0'
+# gem 'spreadsheet', '~> 1.0.3'
 
 # Gráficos
-gem 'chartkick', '~> 1.3.2'
+# gem 'chartkick', '~> 1.3.2'
 
 # Mapas
-gem 'leaflet-rails', '~> 0.7.4'
+# gem 'leaflet-rails', '~> 0.7.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -33,10 +33,12 @@ class Inscripcion
   validates_presence_of :nombres
   validates_presence_of :apellidos
   validates_presence_of :genero
+  validates_inclusion_of :genero, :in => [ 1, 2 ], allow_blank: true
   validates_presence_of :fecha_nac
   # validates_format_of :fecha_nac, :with => /\A[0-9]{2}\/[0-9]{2}\/[0-9]{4}\z/, allow_blank: true
   
   validates_presence_of :talla_camisa
+  validates_inclusion_of :talla_camisa, :in => AppConfig.aplicacion.tallas_camisas, allow_blank: true
   
   validates_presence_of :discapacidad, :if => 'silla_ruedas'
   
@@ -49,6 +51,7 @@ class Inscripcion
   validates_format_of :tlf_fijo, :with => /\A[0-9]{1,}\z/, allow_blank: true, message: 'Solo se permiten números'
   
   validates_presence_of :pais
+  # validates_inclusion_of :pais, :in => AppConfig.aplicacion.paises, allow_blank: true
   validates_presence_of :estado
   
   validates_presence_of :tipo_transaccion

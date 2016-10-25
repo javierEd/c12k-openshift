@@ -35,7 +35,7 @@ module RolInfo
   end
   
   def autenticar_cupos!
-    if Comprobante.count < 1000
+    if Comprobante.count < 2000
       true
     else
       redirect_to root_path, alert: 'Los cupos se encuentran agotados.'

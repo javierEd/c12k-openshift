@@ -7,7 +7,7 @@ class InscripcionesController < ApplicationController
   end
     
   def create
-    @inscripcion = Inscripcion.new(params[:inscripcion].merge({:tmp_vars => get_tmp_vars}))
+    @inscripcion = Inscripcion.new(params.require(:inscripcion).permit(:doc_id,:nombres,:apellidos,:genero,:fecha_nac,:talla_camisa,:discapacidad,:silla_ruedas,:email,:tlf_movil,:tlf_fijo,:pais,:estado,:edad,:categoria,:tipo_transaccion,:desde_banco,:nro_transaccion,:fecha_transaccion,:adicional_transaccion).merge({:tmp_vars => get_tmp_vars}))
     if @inscripcion.save # verify_recaptcha(:model => @inscripcion, :message => "Respuesta invalida") && 
       GenericMailer.generic_email(@inscripcion.email, AppConfig.aplicacion.titulo+' | Datos enviados exitosamente',
                                   '¡Bienvenid'.html_safe+(@inscripcion.genero == 1 ? 'o'.html_safe : 'a'.html_safe)+' '.html_safe+@inscripcion.nombres.titleize+' '.html_safe+@inscripcion.apellidos.titleize+"!<br/>

@@ -61,7 +61,7 @@ module AparienciaHelper
   end
   
   def boton_enlace(titulo, enlace, args = {})
-    link_to( ( args[:icono] ? fa_icon( args[:icono] + ( args[:tamanio] == 'grande' ? ' 5x' : ' lg fw' ) ) : '' ) +' '+ titulo, enlace, class: 'btn btn-default '+( args[:tamanio] && args[:tamanio] == 'grande' ? 'boton_grande' : '' ) )
+    link_to( ( args[:icono] ? fa_icon( args[:icono] + ( args[:tamanio] == 'grande' ? ' 5x' : ' lg fw' ) ) : '' ) +' '+ titulo, enlace, args.except(:icono, :tamanio).merge( :class => 'btn btn-default'+( args[:tamanio] && args[:tamanio] == ' grande' ? ' boton_grande' : '' ) ) )
   end
   
   def rejilla(titulos, args = {}, &block)

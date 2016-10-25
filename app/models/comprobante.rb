@@ -9,6 +9,8 @@ class Comprobante
   
   validates_uniqueness_of :nro
   
+  validates_uniqueness_of :inscripcion_id
+  
   validates_acceptance_of :aprobar
   
   before_create :insertar_numero

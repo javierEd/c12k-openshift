@@ -10,7 +10,7 @@
   <%= f.resumen_errores %>
   <%= f.campo_texto :titulo, autofocus: true, autocomplete: "off" %>
   <%= f.campo_checkbox :mostrar_titulo, label: 'Mostrar título' %>
-  <%= f.campo_ckareatexto :contenido, :label => 'Contenido', :ckeditor => {:language => 'es', :toolbar => [['Source'],
+  <%= f.campo_areatexto :contenido, :label => 'Contenido', :ckeditor => {:language => 'es', :toolbar => [['Source'],
       ['Cut','Copy','Paste', 'PasteText', 'PasteFromWord','-','Undo','Redo'],['Find', 'Replace', '-', 'SelectAll'],['Scayt'],[ 'Link', 'Unlink', 'Anchor' ],['Image','Youtube'],
       ['HorizontalRule'],['Smiley', 'SpecialChar'],['CodeSnippet'],[ 'About' ],
       '/',['FontSize' ],['Bold', 'Italic','Underline','Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'],

@@ -81,7 +81,7 @@ class Cuenta
   end
   
   def update_password(params, *options)
-    solo_password = true
+    self.solo_password = true
     
     current_password = params.delete(:current_password)
 

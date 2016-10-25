@@ -61,8 +61,33 @@ class ComprobantesController < ApplicationController
 #     render :json => arr
 #   end
   
+  def update
+    mcomprobante = Inscripcion.find(params[:inscrito_id]).comprobante
+    GenericMailer.generic_email(mcomprobante.inscripcion.email, AppConfig.aplicacion.titulo+' | Inscripción procesada',
+      '¡Saludos '.html_safe+mcomprobante.inscripcion.nombres.titleize+' '.html_safe+mcomprobante.inscripcion.apellidos.titleize+"!<br/>
+      <br/>
+      Sus datos han sido procesados y aprobados.<br/>
+      <br/>
+      Recuerda descargar e imprimir el comprobante que se encuentra adjunto a este mensaje.<br/>
+      También descargar el documento de liberación de responsabilidad en el siguiente enlace:<br/>
+      <a href=\"#{AppConfig.aplicacion.url}/liberacion\" target=\"_blank\">#{AppConfig.aplicacion.url}/liberacion</a><br/>
+      <br/>
+      El kit de la carrera será entregado el día sábado, 14 de noviembre, recuerda llevar tu cédula de identidad o pasaporte (original y copia), comprobante de inscripción y el documento de liberación de responsabilidad.<br/>
+      <br/>
+      Para mayor información visita el sitio web oficial del evento en el siguiente enlace:<br/>
+      <a href=\"#{AppConfig.aplicacion.url}\" target=\"_blank\">#{AppConfig.aplicacion.url}</a><br/>".html_safe,
+      :adjuntos => [{:nombre => 'comprobante.pdf', :contenido => comprobante(mcomprobante)}] ).deliver_now
+    redirect_to inscrito_comprobante_path(params[:inscrito_id], params[:id]), notice: 'Comprobante reenviado exitosamente.'
+  end
+  
   def show
-    send_data comprobante(Inscripcion.find(params[:inscrito_id]).comprobante), filename: 'comprobante.pdf', type: 'application/pdf'
+    mcomprobante = Inscripcion.find(params[:inscrito_id]).comprobante
+    
+    unless params[:ver]
+      render :locals => { comprobante: mcomprobante }
+    else
+      send_data( comprobante(mcomprobante), filename: 'comprobante.pdf', type: 'application/pdf', disposition: 'inline')
+    end
   end
   
   protected
@@ -138,7 +163,7 @@ class ComprobantesController < ApplicationController
     pdf.move_down 7
     pdf.text "<b>#{comprobante.creado.fecha.strftime('%d/%m/%Y %I:%M:%S %p')}</b>", :inline_format => true
     
-    pdf.image "public/sponsors.jpg", :at => [-10, 190], :scale => 0.55
+    # pdf.image "public/sponsors.jpg", :at => [-10, 190], :scale => 0.55
     
     # pdf.move_down 100
     # pdf.stroke_color "ff0000"

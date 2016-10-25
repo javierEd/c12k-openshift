@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :contenido, :sistema, only: [:index]
   
   resources :inscritos, only: [:index] do
-    resources :comprobantes, only: [:new, :create, :show]
+    resources :comprobantes, only: [:new, :create, :update, :show]
   end
   
   get 'mostrar_numero', to: 'comprobantes#mostrar_numero', as: 'mostrar_numero'

@@ -1,10 +1,21 @@
 <% content_for :titulo_pagina do %>Inscritos<% end %>
 <% content_for :titulo_bloque do %>Inscritos<% end %>
 
+<div style="font-size: 16px; margin-bottom: 15px">
+  Inscritos: <b><%=nro_inscritos%></b> | Procesados: <b><%=nro_comprobantes %></b> 
+</div>
+
 <% unless inscritos.empty? %>
-  <%= rejilla ['Fecha de inscripción','C.I. o Pasaporte','Nombres','Apellidos','...'] do |r| %>
+  <%= rejilla ['Fecha de inscripción','C.I. o Pasaporte','Nombres','Apellidos','Categoria','...'] do |r| %>
     <% inscritos.each do |inscrito| %>
-      <%= r.fila [inscrito.creado.fecha.strftime('%d/%m/%Y %I:%M:%S %p'), inscrito.doc_id.upcase, inscrito.nombres.titleize, inscrito.apellidos.titleize, ( inscrito.comprobante.nil? ? link_to('Procesar', new_inscrito_comprobante_path(inscrito._id)): inscrito.comprobante.nro.to_s.rjust(4,"0") ) ] %>
+      <% if inscrito.discapacidad && inscrito.silla_ruedas %>
+        <% categoria = 'Con silla de ruedas' %>
+      <% elsif inscrito.discapacidad %>
+        <% categoria = 'Sin silla de ruedas' %>
+      <% else %>
+        <% categoria = AppConfig.aplicacion.categorias.select{ |k| k['edad_minima'].to_i <= (2015 - inscrito.fecha_nac.year) && k['edad_maxima'].to_i >= (2015 - inscrito.fecha_nac.year) }[0]['nombre'] %>
+      <% end %>
+      <%= r.fila [inscrito.creado.fecha.strftime('%d/%m/%Y %I:%M:%S %p'), inscrito.doc_id.upcase, inscrito.nombres.titleize, inscrito.apellidos.titleize, categoria, ( inscrito.comprobante.nil? ? link_to('Procesar', new_inscrito_comprobante_path(inscrito._id)) : link_to('Ver comprobante ('+inscrito.comprobante.nro.to_s.rjust(4,"0")+')', inscrito_comprobante_path(inscrito._id,inscrito.comprobante._id) ) ) ] %>
     <% end %>
   <% end %>
 <% else %>
