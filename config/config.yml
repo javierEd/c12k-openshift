@@ -15,7 +15,7 @@ configuracion:
             enable: true
     
             ## Sender address used in mail sent by Diaspora
-            sender_address: 'jaedns@gmail.com'
+            sender_address: 'inademus@alcaldiadecumana.org'
             
             ## This selects which mailer should be used. Use 'smtp' for a smtp
             ## connection, 'sendmail' to use the sendmail binary or
